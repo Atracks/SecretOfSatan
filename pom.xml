@@ -22,6 +22,8 @@
         <org.slf4j-version>1.6.1</org.slf4j-version>
         <jackson-version>2.4.4</jackson-version>
         <postgres.driver.version>9.3-1100-jdbc41</postgres.driver.version>
+        <easymock.version>3.0</easymock.version>
+        <jetbrains.annotation.version>13.0</jetbrains.annotation.version>
     </properties>
 
     <dependencies>
@@ -102,6 +104,21 @@
                 </exclusion>
             </exclusions>
             <scope>runtime</scope>
+        </dependency>
+
+        <!-- easymock -->
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>${easymock.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- null-safety annotations -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>${jetbrains.annotation.version}</version>
         </dependency>
 
         <!-- Jackson JSON Processor -->

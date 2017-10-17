@@ -19,10 +19,10 @@ import java.util.Map;
 public class TestConfiguration {
 
   //FIXME
-  //@Bean(initMethod = "init")
-  //public TestDataInitializer initTestData() {
-  //    return new TestDataInitializer();
-  //}
+  @Bean(initMethod = "init")
+  public TestDataInitializer initTestData() {
+      return new TestDataInitializer();
+  }
 
   @Bean(name = "datasource")
   public DriverManagerDataSource dataSource() {
