@@ -18,10 +18,8 @@ public class UserUnit implements User {
 
     @Id
     @AttributeOverrides({
-        @AttributeOverride(name = "login",
-            column = @Column(name="login")),
-        @AttributeOverride(name = "password",
-            column = @Column(name="password"))
+        @AttributeOverride(name = "login", column = @Column(name="login")),
+        @AttributeOverride(name = "password", column = @Column(name="password"))
     })
 
     @NotNull

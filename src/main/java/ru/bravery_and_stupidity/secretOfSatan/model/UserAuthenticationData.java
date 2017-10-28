@@ -8,14 +8,14 @@ import java.io.Serializable;
 @Embeddable
 final class UserAuthenticationData implements Serializable{
     @NotNull
-    String login;
+    private String login = "";
 
     @NotNull
-    String password;
+    private String password = "";
 
     UserAuthenticationData(){}
 
-    UserAuthenticationData(String login, String password) {
+    UserAuthenticationData(@NotNull String login, @NotNull String password) {
         this.login = login;
         this.password = password;
     }
