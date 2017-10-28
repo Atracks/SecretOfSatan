@@ -6,30 +6,22 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-@IdClass(UserAuthenticationData.class)
 public class UserUnit implements User {
-
-    private static final int NOT_INITIALIZED = -1;
 
     @NotNull
     @Basic
     @Column(name = "name")
     private String name = "";
 
-    @Id
-    @AttributeOverrides({
-        @AttributeOverride(name = "login",
-            column = @Column(name="login")),
-        @AttributeOverride(name = "password",
-            column = @Column(name="password"))
-    })
-
     @NotNull
     @Basic
+    @Id
+    @Column(name = "login")
     private String login = "";
 
     @NotNull
     @Basic
+    @Column(name = "password")
     private String password = "";
 
     @NotNull
@@ -43,7 +35,7 @@ public class UserUnit implements User {
 
     @Basic
     @Column(name = "target")
-    private int target = NOT_INITIALIZED;
+    private String target = "";
 
     @Override
     public void setName(@NotNull String name) {
@@ -71,7 +63,7 @@ public class UserUnit implements User {
     }
 
     @Override
-    public void setTarget(int target) {
+    public void setTarget(String target) {
         this.target = target;
     }
 
@@ -105,7 +97,7 @@ public class UserUnit implements User {
     }
 
     @Override
-    public int getTarget() {
+    public String getTarget() {
         return target;
     }
 
@@ -125,7 +117,7 @@ public class UserUnit implements User {
 
         UserUnit that = (UserUnit) entity;
         return  (that.isAdmin == this.isAdmin)
-                && (that.target == this.target)
+                && (that.target.equals(this.target))
                 && (that.name.equals(this.name))
                 && (that.login.equals(this.login))
                 && (that.password.equals(this.password))
@@ -139,14 +131,13 @@ public class UserUnit implements User {
         result = 31 * result + password.hashCode();
         result = 31 * result + desire.hashCode();
         result = 31 * result + (isAdmin ? 1 : 0);
-        result = 31 * result + target;
+        result = 31 * result + target.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
-        return String.format("User{name = %s, login = %s, password = %s, desire = %s, isAdmin = %s, target = %d}",
+        return String.format("User{name = %s, login = %s, password = %s, desire = %s, isAdmin = %s, target = %s}",
                  name, login, password, desire, isAdmin, target);
     }
-
 }

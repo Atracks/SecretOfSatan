@@ -18,38 +18,38 @@ import java.util.Map;
 @EnableTransactionManagement
 public class TestConfiguration {
 
-  //FIXME
-  @Bean(initMethod = "init")
-  public TestDataInitializer initTestData() {
-      return new TestDataInitializer();
-  }
+    //FIXME
+    @Bean(initMethod = "init")
+    public TestDataInitializer initTestData() {
+        return new TestDataInitializer();
+    }
 
-  @Bean(name = "datasource")
-  public DriverManagerDataSource dataSource() {
-    DriverManagerDataSource dataSource = new DriverManagerDataSource();
-    dataSource.setDriverClassName(org.hsqldb.jdbcDriver.class.getName());
-    dataSource.setUrl("jdbc:hsqldb:mem:mydb");
-    dataSource.setUsername("sa");
-    dataSource.setPassword("jdbc:hsqldb:mem:mydb");
-    return dataSource;
-  }
+    @Bean(name = "datasource")
+    public DriverManagerDataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(org.hsqldb.jdbcDriver.class.getName());
+        dataSource.setUrl("jdbc:hsqldb:mem:mydb");
+        dataSource.setUsername("sa");
+        dataSource.setPassword("jdbc:hsqldb:mem:mydb");
+        return dataSource;
+    }
 
-  @Bean(name = "entityManagerFactory")
-  public LocalContainerEntityManagerFactoryBean entityManagerFactory(DriverManagerDataSource dataSource) {
+    @Bean(name = "entityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DriverManagerDataSource dataSource) {
 
-    LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-    entityManagerFactoryBean.setDataSource(dataSource);
-    entityManagerFactoryBean.setPackagesToScan(new String[]{"ru.bravery_and_stupidity.secretOfSatan.model"});
-    entityManagerFactoryBean.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
-    entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactoryBean.setDataSource(dataSource);
+        entityManagerFactoryBean.setPackagesToScan(new String[]{"ru.bravery_and_stupidity.secretOfSatan.model"});
+        entityManagerFactoryBean.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
+        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
-    Map<String, Object> jpaProperties = new HashMap<String, Object>();
-    jpaProperties.put("hibernate.hbm2ddl.auto", "update");
-    jpaProperties.put("hibernate.show_sql", "true");
-    jpaProperties.put("hibernate.format_sql", "true");
-    jpaProperties.put("hibernate.use_sql_comments", "true");
-    entityManagerFactoryBean.setJpaPropertyMap(jpaProperties);
+        Map<String, Object> jpaProperties = new HashMap<String, Object>();
+        jpaProperties.put("hibernate.hbm2ddl.auto", "update");
+        jpaProperties.put("hibernate.show_sql", "true");
+        jpaProperties.put("hibernate.format_sql", "true");
+        jpaProperties.put("hibernate.use_sql_comments", "true");
+        entityManagerFactoryBean.setJpaPropertyMap(jpaProperties);
 
-    return entityManagerFactoryBean;
-  }
+        return entityManagerFactoryBean;
+    }
 }
