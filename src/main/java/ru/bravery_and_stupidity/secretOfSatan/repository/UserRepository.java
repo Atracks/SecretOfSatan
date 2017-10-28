@@ -11,9 +11,10 @@ public interface UserRepository {
     void saveUser(@NotNull User user);
 
     @Nullable
-    User getUser(@NotNull String login, @NotNull String password);
+    User getUser(@NotNull String login);
 
     List<User> getUsers();
 
-    void deleteUser(int userId);
+    void deleteUser(@NotNull String login);
+
 }
