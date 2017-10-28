@@ -22,12 +22,9 @@ class UserRepositoryUnit implements UserRepository {
 
     @Nullable
     @Override
-    public User getUser(@NotNull String login, @NotNull String password) {
-        List<User> users = em.createQuery("SELECT user FROM UserUnit user WHERE login = :login " +
-          "AND password = :password ")
-          .setParameter("login", login)
-          .setParameter("password", password).getResultList();
-        return users.get(0);
+    public User getUser(@NotNull String login) {
+        User user = em.find(User.class, login);
+        return user;
     }
 
     @Override
@@ -37,8 +34,8 @@ class UserRepositoryUnit implements UserRepository {
     }
 
     @Override
-    public void deleteUser(int userId) {
-        User user = em.find(User.class, userId);
+    public void deleteUser(String login) {
+        User user = em.find(User.class, login);
         em.remove(user);
     }
 }
