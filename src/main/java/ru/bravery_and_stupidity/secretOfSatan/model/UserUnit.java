@@ -13,10 +13,12 @@ public class UserUnit implements User {
     @Id
     @NotNull
     @Basic
+    @Column(name = "login")
     private String login = NOT_INITIALIZED;
 
     @NotNull
     @Basic
+    @Column(name = "password")
     private String password = NOT_INITIALIZED;
 
     @NotNull

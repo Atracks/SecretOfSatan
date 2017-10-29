@@ -23,10 +23,7 @@ class UserRepositoryUnit implements UserRepository {
     @Nullable
     @Override
     public User getUser(@NotNull String login) {
-        String query = "SELECT user FROM UserUnit user WHERE login = :login";
-        return storage.createQuery(query, User.class)
-                .setParameter("login", login)
-                .getSingleResult();
+        return storage.find(User.class, login);
     }
 
     @Override
