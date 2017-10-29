@@ -5,17 +5,17 @@ import org.jetbrains.annotations.NotNull;
 
 public interface User {
 
-    void setName(@NotNull String name);
-
     void setLogin(@NotNull String login);
 
     void setPassword(@NotNull String password);
 
+    void setName(@NotNull String name);
+
     void setDesire(@NotNull String desire);
 
-    void setAdmin(boolean admin);
+    void setTarget(@NotNull String targetLogin);
 
-    void setTarget(String targetLogin);
+    void setAdmin(boolean admin);
 
     @NotNull
     String getName();
@@ -29,8 +29,9 @@ public interface User {
     @NotNull
     String getDesire();
 
-    boolean isAdmin();
-
+    @NotNull
     String getTarget();
+
+    boolean isAdmin();
 
 }

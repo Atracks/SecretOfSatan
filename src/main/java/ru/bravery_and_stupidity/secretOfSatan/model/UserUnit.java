@@ -65,7 +65,7 @@ public class UserUnit implements User {
     }
 
     @Override
-    public void setTarget(String targetLogin) {
+    public void setTarget(@NotNull String targetLogin) {
         this.target = targetLogin;
     }
 
@@ -98,6 +98,7 @@ public class UserUnit implements User {
         return isAdmin;
     }
 
+    @NotNull
     @Override
     public String getTarget() {
         return target;
