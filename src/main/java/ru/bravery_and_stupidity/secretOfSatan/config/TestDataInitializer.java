@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManagerFactory;
 
 import ru.bravery_and_stupidity.secretOfSatan.model.User;
-import ru.bravery_and_stupidity.secretOfSatan.model.UserUnit;
 
 @Component
 public class TestDataInitializer {
@@ -23,7 +22,7 @@ public class TestDataInitializer {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        User user = new UserUnit();
+        User user = new User();
         user.setName("username");
         user.setLogin("somelogin");
 

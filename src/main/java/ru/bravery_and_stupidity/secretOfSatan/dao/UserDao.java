@@ -1,36 +1,79 @@
 package ru.bravery_and_stupidity.secretOfSatan.dao;
 
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.jetbrains.annotations.NotNull;
 
-public interface UserDao {
-
-    void setLogin(@NotNull String login);
-
-    void setPassword(@NotNull String password);
-
-    void setName(@NotNull String name);
-
-    void setDesire(@NotNull String desire);
-
-    void setTarget(@NotNull String targetLogin);
-
-    void setAdmin(boolean admin);
+@JsonNaming
+public class UserDao {
 
     @NotNull
-    String getName();
+    private String login = "";
 
     @NotNull
-    String getLogin();
+    private String password = "";
 
     @NotNull
-    String getPassword();
+    private String name = "";
 
     @NotNull
-    String getDesire();
+    private String desire = "";
 
     @NotNull
-    String getTarget();
+    private String targetLogin = "";
 
-    boolean isAdmin();
+    private boolean isAdmin = false;
+
+    public void setLogin(@NotNull String login) {
+        this.login = login;
+    }
+
+    public void setPassword(@NotNull String password) {
+        this.password = password;
+    }
+
+    public void setName(@NotNull String name) {
+        this.name = name;
+    }
+
+    public void setDesire(@NotNull String desire) {
+        this.desire = desire;
+    }
+
+    public void setTarget(@NotNull String targetLogin) {
+        this.targetLogin = targetLogin;
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    @NotNull
+    public String getName() {
+        return name;
+    }
+
+    @NotNull
+    public String getLogin() {
+        return login;
+    }
+
+    @NotNull
+    public String getPassword() {
+        return password;
+    }
+
+    @NotNull
+    public String getDesire() {
+        return desire;
+    }
+
+    @NotNull
+    public String getTarget() {
+        return targetLogin;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
 
 }
