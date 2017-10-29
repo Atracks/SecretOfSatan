@@ -1,14 +1,21 @@
 package ru.bravery_and_stupidity.secretOfSatan.services;
 
-import ru.bravery_and_stupidity.secretOfSatan.dao.UserUnitDao;
+import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
 
 import java.util.List;
 
 public interface UserService {
-    void addUser(UserUnitDao user);
-    void updateUser(UserUnitDao user);
-    UserUnitDao getUser(String login);
-    List<UserUnitDao> getUsers();
+
+    void addUser(UserDao user);
+
+    void updateUser(UserDao user);
+
+    UserDao getUser(String login);
+
+    List<UserDao> getUsers();
+
     void deleteUser(String login);
+
     void calculateTargets();
+
 }

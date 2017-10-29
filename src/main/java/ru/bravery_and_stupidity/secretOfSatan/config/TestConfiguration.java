@@ -36,21 +36,20 @@ public class TestConfiguration {
 
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DriverManagerDataSource dataSource) {
-
-        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(dataSource);
-        entityManagerFactoryBean.setPackagesToScan("ru.bravery_and_stupidity.secretOfSatan.model");
-        entityManagerFactoryBean.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
-        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactory.setDataSource(dataSource);
+        entityManagerFactory.setPackagesToScan("ru.bravery_and_stupidity.secretOfSatan.model");
+        entityManagerFactory.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
+        entityManagerFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Map<String, Object> jpaProperties = new HashMap<>();
         jpaProperties.put("hibernate.hbm2ddl.auto", "update");
         jpaProperties.put("hibernate.show_sql", "true");
         jpaProperties.put("hibernate.format_sql", "true");
         jpaProperties.put("hibernate.use_sql_comments", "true");
-        entityManagerFactoryBean.setJpaPropertyMap(jpaProperties);
+        entityManagerFactory.setJpaPropertyMap(jpaProperties);
 
-        return entityManagerFactoryBean;
+        return entityManagerFactory;
     }
 
 }

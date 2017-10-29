@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.bravery_and_stupidity.secretOfSatan.dao.UserUnitDao;
+import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
 import ru.bravery_and_stupidity.secretOfSatan.services.UserService;
 
 import java.util.List;
@@ -20,25 +20,25 @@ public class UserController {
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     @ResponseBody
-    public void addUser(@RequestBody UserUnitDao user) {
+    public void addUser(@RequestBody UserDao user) {
         userService.addUser(user);
     }
 
     @RequestMapping(value = "/updateUser", method = RequestMethod.PATCH)
     @ResponseBody
-    public void updateUser(@RequestBody UserUnitDao user) {
+    public void updateUser(@RequestBody UserDao user) {
         userService.updateUser(user);
     }
 
     @RequestMapping(value = "/getUser/{login}", method = RequestMethod.GET)
     @ResponseBody
-    public UserUnitDao getUser(@PathVariable("login") String login) {
+    public UserDao getUser(@PathVariable("login") String login) {
         return userService.getUser(login);
     }
 
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
     @ResponseBody
-    public List<UserUnitDao> getUsers() {
+    public List<UserDao> getUsers() {
         return userService.getUsers();
     }
 

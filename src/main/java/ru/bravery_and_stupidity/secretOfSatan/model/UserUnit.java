@@ -10,8 +10,8 @@ public class UserUnit implements User {
 
     private static final String NOT_INITIALIZED = "";
 
-    @Id
     @NotNull
+    @Id
     @Basic
     @Column(name = "login")
     private String login = NOT_INITIALIZED;
