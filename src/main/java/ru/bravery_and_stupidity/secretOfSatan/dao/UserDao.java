@@ -2,6 +2,7 @@ package ru.bravery_and_stupidity.secretOfSatan.dao;
 
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.jetbrains.annotations.NotNull;
+import ru.bravery_and_stupidity.secretOfSatan.model.User;
 
 @JsonNaming
 public class UserDao {
@@ -21,8 +22,6 @@ public class UserDao {
     @NotNull
     private String targetLogin = "";
 
-    private boolean isAdmin = false;
-
     public void setLogin(@NotNull String login) {
         this.login = login;
     }
@@ -41,10 +40,6 @@ public class UserDao {
 
     public void setTarget(@NotNull String targetLogin) {
         this.targetLogin = targetLogin;
-    }
-
-    public void setAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
     }
 
     @NotNull
@@ -72,8 +67,16 @@ public class UserDao {
         return targetLogin;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
+    @NotNull
+    public User mapToModel() {
+        User model = new User();
+        model.setLogin(login);
+        model.setPassword(password);
+        model.setName(name);
+        model.setDesire(desire);
+        model.setTarget(targetLogin);
+        model.setAdmin(false);
+        return model;
     }
 
 }

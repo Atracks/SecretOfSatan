@@ -1,11 +1,13 @@
 package ru.bravery_and_stupidity.secretOfSatan.services;
 
 import org.easymock.EasyMock;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.bravery_and_stupidity.secretOfSatan.TestDataProvider;
 import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
 import ru.bravery_and_stupidity.secretOfSatan.model.User;
+import ru.bravery_and_stupidity.secretOfSatan.model.UserValidator;
 import ru.bravery_and_stupidity.secretOfSatan.repository.UserRepository;
 
 
@@ -15,23 +17,40 @@ final class UserServiceUnitTest {
 
     private final UserRepository repositoryMock = EasyMock.createMock(UserRepository.class);
 
-    private TestDataProvider testData = TestDataProvider.INSTANCE;
+    private TestDataProvider testDataProvider = TestDataProvider.INSTANCE;
 
     @BeforeEach
-    private void setUp() {
+    void setUp() {
         EasyMock.reset(repositoryMock);
-        targetOfTesting = new UserServiceUnit(repositoryMock);
+        UserValidator validator = testDataProvider.getUserValidator();
+        targetOfTesting = new UserServiceUnit(repositoryMock, validator);
     }
 
-    /*@Test
-    private void addUserCaseHappyPath() {
-        addUserCaseHappyPathPrepareMocks();
+    @Test
+    void addUserCaseHappyPath() {
+        UserDao simpleUserData = testDataProvider.getSimpleUserDaoExample();
+        addUserCaseHappyPathPrepareMocks(simpleUserData);
 
-    }*/
+        EasyMock.replay(repositoryMock);
+        targetOfTesting.addUser(simpleUserData);
+        EasyMock.verify(repositoryMock);
 
-    private void addUserCaseHappyPathPrepareMocks() {
-        User simpleUser = testData.getNewSimpleUserExample();
-        repositoryMock.saveUser(simpleUser);
+    }
+
+    private void addUserCaseHappyPathPrepareMocks(UserDao incomingData) {
+        User expectedUser = incomingData.mapToModel();
+        repositoryMock.saveUser(expectedUser);
+    }
+
+    @Test
+    void addUserCaseInvalidUser() {
+        UserDao invalidUserData = testDataProvider.getInvalidUserDaoExample();
+        try {
+            targetOfTesting.addUser(invalidUserData);
+            Assertions.fail("an exception must be thrown in case of invalid argument");
+        } catch (IllegalArgumentException expectedException) {
+            // correct work case
+        }
     }
 
     /*@Test
