@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
+import ru.bravery_and_stupidity.secretOfSatan.model.User;
 import ru.bravery_and_stupidity.secretOfSatan.repository.UserRepository;
 
 import java.util.Collections;
@@ -16,13 +17,15 @@ public final class UserServiceUnit implements UserService {
 
     private static final Logger log = Logger.getLogger(UserServiceUnit.class);
 
-    public UserServiceUnit(UserRepository repository) {
+    UserServiceUnit(UserRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public void addUser(@NotNull UserDao user) {
-
+    public void addUser(@NotNull UserDao userData) {
+        //TODO: validate arguments
+        User user = userData.mapToModel();
+        repository.saveUser(user);
     }
 
     @Override

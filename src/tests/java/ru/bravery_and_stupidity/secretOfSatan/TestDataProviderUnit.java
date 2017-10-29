@@ -9,7 +9,13 @@ final class TestDataProviderUnit implements TestDataProvider {
     @NotNull
     @Override
     public UserDao getSimpleUserDaoExample() {
-        return new UserDao();
+        UserDao user = new UserDao();
+        user.setLogin("simpleLogin");
+        user.setPassword("simplePassword");
+        user.setName("simpleName");
+        user.setDesire("simpleDesire1, simpleDesire2, simpleDesire3");
+        user.setTarget("");
+        return user;
     }
 
     @NotNull
@@ -23,11 +29,11 @@ final class TestDataProviderUnit implements TestDataProvider {
     @Override
     public User getNewSimpleUserExample() {
         User user = new User();
-        user.setName("simple_user");
         user.setLogin("simple_user_login");
+        user.setName("simple_user");
         user.setPassword("simple_user_password");
-        user.setAdmin(false);
         user.setTarget("some_other_user");
+        user.setAdmin(false);
         return user;
     }
 

@@ -15,23 +15,28 @@ final class UserServiceUnitTest {
 
     private final UserRepository repositoryMock = EasyMock.createMock(UserRepository.class);
 
-    private TestDataProvider testData = TestDataProvider.INSTANCE;
+    private TestDataProvider testDataProvider = TestDataProvider.INSTANCE;
 
     @BeforeEach
-    private void setUp() {
+    void setUp() {
         EasyMock.reset(repositoryMock);
         targetOfTesting = new UserServiceUnit(repositoryMock);
     }
 
-    /*@Test
-    private void addUserCaseHappyPath() {
-        addUserCaseHappyPathPrepareMocks();
+    @Test
+    void addUserCaseHappyPath() {
+        UserDao simpleUserDao = testDataProvider.getSimpleUserDaoExample();
+        addUserCaseHappyPathPrepareMocks(simpleUserDao);
 
-    }*/
+        EasyMock.replay(repositoryMock);
+        targetOfTesting.addUser(simpleUserDao);
+        EasyMock.verify(repositoryMock);
 
-    private void addUserCaseHappyPathPrepareMocks() {
-        User simpleUser = testData.getNewSimpleUserExample();
-        repositoryMock.saveUser(simpleUser);
+    }
+
+    private void addUserCaseHappyPathPrepareMocks(UserDao incomingData) {
+        User expectedUser = incomingData.mapToModel();
+        repositoryMock.saveUser(expectedUser);
     }
 
     /*@Test

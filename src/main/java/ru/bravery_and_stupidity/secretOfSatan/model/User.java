@@ -2,6 +2,8 @@ package ru.bravery_and_stupidity.secretOfSatan.model;
 
 
 import org.jetbrains.annotations.NotNull;
+import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
+
 import javax.persistence.*;
 
 @Entity
@@ -90,6 +92,17 @@ public class User {
     @NotNull
     public String getTarget() {
         return target;
+    }
+
+    @NotNull
+    public UserDao mapToDao() {
+        UserDao dao = new UserDao();
+        dao.setLogin(login);
+        dao.setPassword(password);
+        dao.setName(name);
+        dao.setDesire(desire);
+        dao.setTarget(target);
+        return dao;
     }
 
     // TODO: replace constructor with instantiation with builder
