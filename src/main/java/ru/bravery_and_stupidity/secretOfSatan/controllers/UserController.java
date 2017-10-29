@@ -16,7 +16,7 @@ public class UserController {
     private static final Logger logger = Logger.getLogger(UserController.class);
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     @ResponseBody
