@@ -18,7 +18,6 @@ public class TestDataInitializer {
     private EntityManagerFactory entityManagerFactory;
 
     public void init() throws Exception {
-
         SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
 
         Session session = sessionFactory.openSession();
@@ -31,4 +30,5 @@ public class TestDataInitializer {
         session.persist(user);
         transaction.commit();
     }
+
 }

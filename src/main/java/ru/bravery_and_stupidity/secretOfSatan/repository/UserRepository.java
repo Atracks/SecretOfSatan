@@ -15,5 +15,6 @@ public interface UserRepository {
 
     List<User> getUsers();
 
-    void deleteUser(String login);
+    void deleteUser(@NotNull String login);
+
 }

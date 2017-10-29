@@ -13,29 +13,29 @@ import java.util.List;
 class UserRepositoryUnit implements UserRepository {
 
     @PersistenceContext
-    private EntityManager em;
+    private EntityManager storage;
 
     @Override
     public void saveUser(@NotNull User user) {
-        em.merge(user);
+        storage.merge(user);
     }
 
     @Nullable
     @Override
     public User getUser(@NotNull String login) {
-        User user = em.find(User.class, login);
-        return user;
+        return storage.find(User.class, login);
     }
 
     @Override
     public List<User> getUsers() {
-        List<User> users = em.createQuery("FROM User").getResultList();
-        return users;
+        return storage.createQuery("FROM User", User.class).getResultList();
     }
 
     @Override
-    public void deleteUser(String login) {
-        User user = em.find(User.class, login);
-        em.remove(user);
+    public void deleteUser(@NotNull String login) {
+        String query = "DELETE FROM UserUnit WHERE login = :login";
+        storage.createQuery(query, User.class)
+                .executeUpdate();
     }
+
 }

@@ -15,7 +15,7 @@ public interface User {
 
     void setAdmin(boolean admin);
 
-    void setTarget(String target);
+    void setTarget(String targetLogin);
 
     @NotNull
     String getName();

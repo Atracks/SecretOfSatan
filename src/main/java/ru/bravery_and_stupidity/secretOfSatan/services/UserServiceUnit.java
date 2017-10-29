@@ -1,29 +1,30 @@
 package ru.bravery_and_stupidity.secretOfSatan.services;
 
 import org.springframework.stereotype.Service;
-import ru.bravery_and_stupidity.secretOfSatan.dao.UserUnitDao;
+import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
 
 import java.util.List;
 
 @Service
 public class UserServiceUnit implements UserService {
+
     @Override
-    public void addUser(UserUnitDao user) {
+    public void addUser(UserDao user) {
 
     }
 
     @Override
-    public void updateUser(UserUnitDao user) {
+    public void updateUser(UserDao user) {
 
     }
 
     @Override
-    public UserUnitDao getUser(String login) {
+    public UserDao getUser(String login) {
         return null;
     }
 
     @Override
-    public List<UserUnitDao> getUsers() {
+    public List<UserDao> getUsers() {
         return null;
     }
 
@@ -36,4 +37,5 @@ public class UserServiceUnit implements UserService {
     public void calculateTargets() {
 
     }
+
 }

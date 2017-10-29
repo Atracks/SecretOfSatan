@@ -21,29 +21,29 @@ public class DevelopmentConfiguration {
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         //FIXME выбрать БД
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/trackerdb?useUnicode=true&characterEncoding=utf8");
-        dataSource.setUsername("login");
-        dataSource.setPassword("pass");
+        //dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        //dataSource.setUrl("jdbc:mysql://localhost:3306/trackerdb?useUnicode=true&characterEncoding=utf8");
+        //dataSource.setUsername("login");
+        //dataSource.setPassword("pass");
         return dataSource;
     }
 
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DriverManagerDataSource dataSource) {
-        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(dataSource);
-        entityManagerFactoryBean.setPackagesToScan(new String[]{"ru.bravery_and_stupidity.secretOfSatan.model"});
-        entityManagerFactoryBean.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
-        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactory.setDataSource(dataSource);
+        entityManagerFactory.setPackagesToScan("ru.bravery_and_stupidity.secretOfSatan.model");
+        entityManagerFactory.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
+        entityManagerFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
-        Map<String, Object> jpaProperties = new HashMap<String, Object>();
+        Map<String, Object> jpaProperties = new HashMap<>();
         jpaProperties.put("hibernate.hbm2ddl.auto", "update");
         jpaProperties.put("hibernate.show_sql", "true");
         jpaProperties.put("hibernate.format_sql", "true");
         jpaProperties.put("hibernate.use_sql_comments", "true");
         jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-        entityManagerFactoryBean.setJpaPropertyMap(jpaProperties);
+        entityManagerFactory.setJpaPropertyMap(jpaProperties);
 
-        return entityManagerFactoryBean;
+        return entityManagerFactory;
     }
 }

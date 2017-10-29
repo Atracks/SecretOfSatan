@@ -8,26 +8,28 @@ import javax.persistence.*;
 @Table(name = "users")
 public class UserUnit implements User {
 
-    @NotNull
-    @Basic
-    @Column(name = "name")
-    private String name = "";
+    private static final String NOT_INITIALIZED = "";
 
     @NotNull
-    @Basic
     @Id
+    @Basic
     @Column(name = "login")
-    private String login = "";
+    private String login = NOT_INITIALIZED;
 
     @NotNull
     @Basic
     @Column(name = "password")
-    private String password = "";
+    private String password = NOT_INITIALIZED;
+
+    @NotNull
+    @Basic
+    @Column(name = "name")
+    private String name = NOT_INITIALIZED;
 
     @NotNull
     @Basic
     @Column(name = "desire")
-    private String desire = "";
+    private String desire = NOT_INITIALIZED;
 
     @Basic
     @Column(name = "isAdmin")
@@ -35,7 +37,7 @@ public class UserUnit implements User {
 
     @Basic
     @Column(name = "target")
-    private String target = "";
+    private String target = NOT_INITIALIZED;
 
     @Override
     public void setName(@NotNull String name) {
@@ -63,8 +65,8 @@ public class UserUnit implements User {
     }
 
     @Override
-    public void setTarget(String target) {
-        this.target = target;
+    public void setTarget(String targetLogin) {
+        this.target = targetLogin;
     }
 
     @Override
@@ -116,10 +118,10 @@ public class UserUnit implements User {
         }
 
         UserUnit that = (UserUnit) entity;
-        return  (that.isAdmin == this.isAdmin)
+        return  (that.login.equals(this.login))
+                && (that.isAdmin == this.isAdmin)
                 && (that.target.equals(this.target))
                 && (that.name.equals(this.name))
-                && (that.login.equals(this.login))
                 && (that.password.equals(this.password))
                 && (that.desire.equals(this.desire));
     }
@@ -130,8 +132,8 @@ public class UserUnit implements User {
         result = 31 * result + login.hashCode();
         result = 31 * result + password.hashCode();
         result = 31 * result + desire.hashCode();
-        result = 31 * result + (isAdmin ? 1 : 0);
         result = 31 * result + target.hashCode();
+        result = 31 * result + (isAdmin ? 1 : 0);
         return result;
     }
 
@@ -140,4 +142,5 @@ public class UserUnit implements User {
         return String.format("User{name = %s, login = %s, password = %s, desire = %s, isAdmin = %s, target = %s}",
                  name, login, password, desire, isAdmin, target);
     }
+
 }
