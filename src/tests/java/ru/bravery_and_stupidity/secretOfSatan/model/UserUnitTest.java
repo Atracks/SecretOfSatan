@@ -62,7 +62,6 @@ class UserUnitTest {
         try {
             rabbit.setName(null);
             Assertions.fail("an exception must be thrown in case of null argument");
-
         } catch (IllegalArgumentException expectedException) {
             // correct work case
         }

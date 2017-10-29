@@ -7,13 +7,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-final class UserValidatorUnit implements UserValidator {
+public final class UserValidatorUnit implements UserValidator {
 
     private static UserValidator instance = null;
 
     private static Logger log = Logger.getLogger(UserValidatorUnit.class);
 
-    static UserValidator getInstance() {
+    public static UserValidator getInstance() {
         if (null == instance) {
             instance = new UserValidatorUnit();
         }
@@ -52,7 +52,7 @@ final class UserValidatorUnit implements UserValidator {
         Pattern allowedNamePattern = Pattern.compile(allowedNamePatternDescription);
         Matcher matcher = allowedNamePattern.matcher(username);
 
-        if (matcher.matches()) {
+        if (!matcher.matches()) {
             log.info("invalid username: " + username);
             return true;
         }

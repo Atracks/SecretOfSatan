@@ -9,6 +9,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import ru.bravery_and_stupidity.secretOfSatan.model.UserValidator;
+import ru.bravery_and_stupidity.secretOfSatan.model.UserValidatorUnit;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,6 +52,11 @@ public class TestConfiguration {
         entityManagerFactory.setJpaPropertyMap(jpaProperties);
 
         return entityManagerFactory;
+    }
+
+    @Bean
+    public UserValidator instantiateUserValidator() {
+        return UserValidatorUnit.getInstance();
     }
 
 }

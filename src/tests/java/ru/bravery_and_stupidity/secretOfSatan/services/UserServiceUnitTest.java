@@ -1,11 +1,13 @@
 package ru.bravery_and_stupidity.secretOfSatan.services;
 
 import org.easymock.EasyMock;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.bravery_and_stupidity.secretOfSatan.TestDataProvider;
 import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
 import ru.bravery_and_stupidity.secretOfSatan.model.User;
+import ru.bravery_and_stupidity.secretOfSatan.model.UserValidator;
 import ru.bravery_and_stupidity.secretOfSatan.repository.UserRepository;
 
 
@@ -20,16 +22,17 @@ final class UserServiceUnitTest {
     @BeforeEach
     void setUp() {
         EasyMock.reset(repositoryMock);
-        targetOfTesting = new UserServiceUnit(repositoryMock);
+        UserValidator validator = testDataProvider.getUserValidator();
+        targetOfTesting = new UserServiceUnit(repositoryMock, validator);
     }
 
     @Test
     void addUserCaseHappyPath() {
-        UserDao simpleUserDao = testDataProvider.getSimpleUserDaoExample();
-        addUserCaseHappyPathPrepareMocks(simpleUserDao);
+        UserDao simpleUserData = testDataProvider.getSimpleUserDaoExample();
+        addUserCaseHappyPathPrepareMocks(simpleUserData);
 
         EasyMock.replay(repositoryMock);
-        targetOfTesting.addUser(simpleUserDao);
+        targetOfTesting.addUser(simpleUserData);
         EasyMock.verify(repositoryMock);
 
     }
@@ -37,6 +40,17 @@ final class UserServiceUnitTest {
     private void addUserCaseHappyPathPrepareMocks(UserDao incomingData) {
         User expectedUser = incomingData.mapToModel();
         repositoryMock.saveUser(expectedUser);
+    }
+
+    @Test
+    void addUserCaseInvalidUser() {
+        UserDao invalidUserData = testDataProvider.getInvalidUserDaoExample();
+        try {
+            targetOfTesting.addUser(invalidUserData);
+            Assertions.fail("an exception must be thrown in case of invalid argument");
+        } catch (IllegalArgumentException expectedException) {
+            // correct work case
+        }
     }
 
     /*@Test

@@ -3,6 +3,7 @@ package ru.bravery_and_stupidity.secretOfSatan;
 import org.jetbrains.annotations.NotNull;
 import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
 import ru.bravery_and_stupidity.secretOfSatan.model.User;
+import ru.bravery_and_stupidity.secretOfSatan.model.UserValidator;
 
 public interface TestDataProvider {
 
@@ -16,5 +17,8 @@ public interface TestDataProvider {
 
     @NotNull
     User getNewSimpleUserExample();
+
+    @NotNull
+    UserValidator getUserValidator();
 
 }

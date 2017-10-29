@@ -3,7 +3,7 @@ package ru.bravery_and_stupidity.secretOfSatan.model;
 
 import org.jetbrains.annotations.Nullable;
 
-interface UserValidator {
+public interface UserValidator {
 
     boolean isWrong(@Nullable User user);
 

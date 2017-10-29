@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
 import ru.bravery_and_stupidity.secretOfSatan.model.User;
+import ru.bravery_and_stupidity.secretOfSatan.model.UserValidator;
 import ru.bravery_and_stupidity.secretOfSatan.repository.UserRepository;
 
 import java.util.Collections;
@@ -15,17 +16,27 @@ public final class UserServiceUnit implements UserService {
 
     private UserRepository repository;
 
+    private UserValidator validator;
+
     private static final Logger log = Logger.getLogger(UserServiceUnit.class);
 
-    UserServiceUnit(UserRepository repository) {
+    UserServiceUnit(UserRepository repository, UserValidator validator) {
         this.repository = repository;
+        this.validator = validator;
     }
 
     @Override
     public void addUser(@NotNull UserDao userData) {
-        //TODO: validate arguments
         User user = userData.mapToModel();
+        requireValid(user);
+
         repository.saveUser(user);
+    }
+
+    private void requireValid(User user) {
+        if (validator.isWrong(user)) {
+            throw new IllegalArgumentException(user.toString());
+        }
     }
 
     @Override
