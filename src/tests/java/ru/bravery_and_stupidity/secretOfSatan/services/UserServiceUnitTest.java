@@ -80,11 +80,21 @@ final class UserServiceUnitTest {
         EasyMock.expectLastCall().andReturn(someUser);
     }
 
-    /*@Test
-    void updateUser() {
+    @Test
+    void updateUserCaseHappyPath() {
+        UserDao simpleUserData = testDataProvider.getSimpleUserDaoExample();
     }
 
-    @Test
+    private void updateUserCaseHappyPathPrepareMocks(UserDao incomingData) {
+        String login = incomingData.getLogin();
+        repositoryMock.getUser(login);
+        EasyMock.expectLastCall().andReturn(null);
+
+        User expectedUser = incomingData.mapToModel();
+        repositoryMock.saveUser(expectedUser);
+    }
+
+    /*@Test
     void getUser() {
     }
 
