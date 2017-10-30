@@ -47,7 +47,7 @@ final class UserServiceUnitTest {
     }
 
     @Test
-    void addUserCaseInvalidUser() {
+    void addUserCaseInvalidData() {
         UserDao invalidUserData = testDataProvider.getInvalidUserDaoExample();
         try {
             targetOfTesting.addUser(invalidUserData);
@@ -80,11 +80,59 @@ final class UserServiceUnitTest {
         EasyMock.expectLastCall().andReturn(someUser);
     }
 
-    /*@Test
-    void updateUser() {
+    @Test
+    void updateUserCaseHappyPath() {
+        UserDao simpleUserData = testDataProvider.getSimpleUserDaoExample();
+        updateUserCaseHappyPathPrepareMocks(simpleUserData);
+
+        EasyMock.replay(repositoryMock);
+        targetOfTesting.updateUser(simpleUserData);
+        EasyMock.verify(repositoryMock);
+    }
+
+    private void updateUserCaseHappyPathPrepareMocks(UserDao incomingData) {
+        String login = incomingData.getLogin();
+        User userToUpdate = testDataProvider.getNewSimpleUserExample();
+        repositoryMock.getUser(login);
+        EasyMock.expectLastCall().andReturn(userToUpdate);
+
+        User expectedUser = incomingData.mapToModel();
+        repositoryMock.saveUser(expectedUser);
     }
 
     @Test
+    void updateUserCaseInvalidData() {
+        UserDao invalidUserData = testDataProvider.getInvalidUserDaoExample();
+        try {
+            targetOfTesting.updateUser(invalidUserData);
+            Assertions.fail("an exception must be thrown in case of invalid argument");
+        } catch (IllegalArgumentException expectedException) {
+            // correct work case
+        }
+    }
+
+    @Test
+    void updateUserCaseForeignLogin() {
+        UserDao incomingUserData = testDataProvider.getSimpleUserDaoExample();
+        updateUserCaseForeignLoginPrepareMocks(incomingUserData);
+
+        EasyMock.replay(repositoryMock);
+        try {
+            targetOfTesting.updateUser(incomingUserData);
+            Assertions.fail("an exception must be thrown in case of invalid argument");
+        } catch (IllegalArgumentException expectedException) {
+            // correct work case
+        }
+        EasyMock.verify(repositoryMock);
+    }
+
+    private void updateUserCaseForeignLoginPrepareMocks(UserDao incomingUserData) {
+        String login = incomingUserData.getLogin();
+        repositoryMock.getUser(login);
+        EasyMock.expectLastCall().andReturn(null);
+    }
+
+    /*@Test
     void getUser() {
     }
 

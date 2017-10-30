@@ -34,6 +34,15 @@ public final class UserServiceUnit implements UserService {
         repository.saveUser(user);
     }
 
+    @Override
+    public void updateUser(@NotNull UserDao userData) {
+        User user = userData.mapToModel();
+        requireValid(user);
+        requireExist(user);
+
+        repository.saveUser(user);
+    }
+
     private void requireValid(User user) {
         if (validator.isWrong(user)) {
             String diagnostics = "entered data is invalid: " + user.toString();
@@ -42,17 +51,23 @@ public final class UserServiceUnit implements UserService {
     }
 
     private void requireUnique(User user) {
-        String login = user.getLogin();
-        User userWithSameLogin = repository.getUser(login);
-        if (userWithSameLogin != null) {
-            String diagnostics = "login \"" + login + "\" is already in use";
+        if (isUserExist(user)) {
+            String diagnostics = "login \"" + user.getLogin() + "\" is already in use";
             throw new IllegalArgumentException(diagnostics);
         }
     }
 
-    @Override
-    public void updateUser(@NotNull UserDao user) {
+    private void requireExist(User user) {
+        if (!isUserExist(user)) {
+            String diagnostics = "account with login \"" + user.getLogin() + "\" is not exist";
+            throw new IllegalArgumentException(diagnostics);
+        }
+    }
 
+    private boolean isUserExist(User user) {
+        String login = user.getLogin();
+        User userWithSameLogin = repository.getUser(login);
+        return (userWithSameLogin != null);
     }
 
     @Override
