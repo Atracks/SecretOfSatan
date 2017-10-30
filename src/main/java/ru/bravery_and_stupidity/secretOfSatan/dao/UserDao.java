@@ -79,4 +79,39 @@ public class UserDao {
         return model;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserDao userDao = (UserDao) o;
+
+        return login.equals(userDao.login)
+                && password.equals(userDao.password)
+                && name.equals(userDao.name)
+                && desire.equals(userDao.desire)
+                && targetLogin.equals(userDao.targetLogin);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = login.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + desire.hashCode();
+        result = 31 * result + targetLogin.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDao{"
+                + "login='" + login + '\''
+                + ", password='" + password + '\''
+                + ", name='" + name + '\''
+                + ", desire='" + desire + '\''
+                + ", targetLogin='" + targetLogin + '\''
+                + '}';
+    }
+
 }

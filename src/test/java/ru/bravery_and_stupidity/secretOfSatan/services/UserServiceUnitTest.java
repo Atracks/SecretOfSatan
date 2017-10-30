@@ -74,7 +74,7 @@ final class UserServiceUnitTest {
 
     private void addUserCaseLoginIsNotUniquePrepareMocks(UserDao incomingData) {
         String expectedLogin = incomingData.getLogin();
-        User someUser = testDataProvider.getNewSimpleUserExample();
+        User someUser = testDataProvider.getSimpleUserExample();
 
         repositoryMock.getUser(expectedLogin);
         EasyMock.expectLastCall().andReturn(someUser);
@@ -92,7 +92,7 @@ final class UserServiceUnitTest {
 
     private void updateUserCaseHappyPathPrepareMocks(UserDao incomingData) {
         String login = incomingData.getLogin();
-        User userToUpdate = testDataProvider.getNewSimpleUserExample();
+        User userToUpdate = testDataProvider.getSimpleUserExample();
         repositoryMock.getUser(login);
         EasyMock.expectLastCall().andReturn(userToUpdate);
 
@@ -132,11 +132,58 @@ final class UserServiceUnitTest {
         EasyMock.expectLastCall().andReturn(null);
     }
 
-    /*@Test
-    void getUser() {
+    @Test
+    void getUserCaseHappyPath() {
+        String login = "someValidLogin";
+        UserDao expectedUserData = getUserCaseHappyPathPrepareMocks(login);
+        EasyMock.replay(repositoryMock);
+
+        UserDao actualUserData = targetOfTesting.getUser(login);
+
+        Assertions.assertNotNull(actualUserData);
+        Assertions.assertEquals(expectedUserData, actualUserData);
+        EasyMock.verify(repositoryMock);
+    }
+
+    private UserDao getUserCaseHappyPathPrepareMocks(String login) {
+        User requiredUser = testDataProvider.getSimpleUserExample();
+        requiredUser.setLogin(login);
+
+        repositoryMock.getUser(login);
+        EasyMock.expectLastCall().andReturn(requiredUser);
+
+        return requiredUser.mapToDao();
     }
 
     @Test
+    void getUserCaseNoSuchUser() {
+        String login = "someValidLogin";
+        getUserCaseNoSuchUserPrepareMocks(login);
+        EasyMock.replay(repositoryMock);
+
+        UserDao actualUserData = targetOfTesting.getUser(login);
+
+        Assertions.assertNull(actualUserData);
+        EasyMock.verify(repositoryMock);
+    }
+
+    private void getUserCaseNoSuchUserPrepareMocks(String login) {
+        repositoryMock.getUser(login);
+        EasyMock.expectLastCall().andReturn(null);
+    }
+
+    @Test
+    void getUserCaseInvalidLogin() {
+        String invalidLogin = "DROP TABLE users";
+        try {
+            targetOfTesting.getUser(invalidLogin);
+            Assertions.fail("an exception must be thrown in case of invalid argument");
+        } catch (IllegalArgumentException expectedException) {
+            // correct work case
+        }
+    }
+
+    /*@Test
     void getUsers() {
     }
 

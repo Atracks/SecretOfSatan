@@ -16,7 +16,7 @@ public interface TestDataProvider {
     UserDao getInvalidUserDaoExample();
 
     @NotNull
-    User getNewSimpleUserExample();
+    User getSimpleUserExample();
 
     @NotNull
     UserValidator getUserValidator();

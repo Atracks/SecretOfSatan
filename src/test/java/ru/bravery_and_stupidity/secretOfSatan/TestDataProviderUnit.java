@@ -34,7 +34,7 @@ final class TestDataProviderUnit implements TestDataProvider {
 
     @NotNull
     @Override
-    public User getNewSimpleUserExample() {
+    public User getSimpleUserExample() {
         User user = new User();
         user.setLogin("simple_user_login");
         user.setName("simple_user");
