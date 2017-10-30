@@ -29,13 +29,24 @@ public final class UserServiceUnit implements UserService {
     public void addUser(@NotNull UserDao userData) {
         User user = userData.mapToModel();
         requireValid(user);
+        requireUnique(user);
 
         repository.saveUser(user);
     }
 
     private void requireValid(User user) {
         if (validator.isWrong(user)) {
-            throw new IllegalArgumentException(user.toString());
+            String diagnostics = "entered data is invalid: " + user.toString();
+            throw new IllegalArgumentException(diagnostics);
+        }
+    }
+
+    private void requireUnique(User user) {
+        String login = user.getLogin();
+        User userWithSameLogin = repository.getUser(login);
+        if (userWithSameLogin != null) {
+            String diagnostics = "login \"" + login + "\" is already in use";
+            throw new IllegalArgumentException(diagnostics);
         }
     }
 
