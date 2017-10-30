@@ -38,6 +38,10 @@ final class UserServiceUnitTest {
     }
 
     private void addUserCaseHappyPathPrepareMocks(UserDao incomingData) {
+        String expectedLogin = incomingData.getLogin();
+        repositoryMock.getUser(expectedLogin);
+        EasyMock.expectLastCall().andReturn(null);
+
         User expectedUser = incomingData.mapToModel();
         repositoryMock.saveUser(expectedUser);
     }
@@ -51,6 +55,29 @@ final class UserServiceUnitTest {
         } catch (IllegalArgumentException expectedException) {
             // correct work case
         }
+    }
+
+    @Test
+    void addUserCaseLoginIsNotUnique() {
+        UserDao userData = testDataProvider.getSimpleUserDaoExample();
+        addUserCaseLoginIsNotUniquePrepareMocks(userData);
+
+        EasyMock.replay(repositoryMock);
+        try{
+            targetOfTesting.addUser(userData);
+            Assertions.fail("an exception must be thrown in case of invalid argument");
+        } catch (IllegalArgumentException expectedException) {
+            // correct work case
+        }
+        EasyMock.verify(repositoryMock);
+    }
+
+    private void addUserCaseLoginIsNotUniquePrepareMocks(UserDao incomingData) {
+        String expectedLogin = incomingData.getLogin();
+        User someUser = testDataProvider.getNewSimpleUserExample();
+
+        repositoryMock.getUser(expectedLogin);
+        EasyMock.expectLastCall().andReturn(someUser);
     }
 
     /*@Test
