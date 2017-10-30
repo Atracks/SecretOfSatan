@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.bravery_and_stupidity.secretOfSatan.TestDataProvider;
 
-class UserValidatorUnitTest {
+final class UserValidatorUnitTest {
 
     private UserValidator targetOfTesting = null;
 
