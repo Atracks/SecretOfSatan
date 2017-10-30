@@ -7,6 +7,8 @@ public interface UserValidator {
 
     boolean isWrong(@Nullable User user);
 
+    boolean isWrong(@Nullable String login);
+
     boolean isWrong(@Nullable String login, @Nullable String password);
 
 }

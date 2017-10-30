@@ -18,7 +18,7 @@ final class UserValidatorUnitTest {
 
     @Test
     void userIsOk() {
-        User okUser = testDataProvider.getNewSimpleUserExample();
+        User okUser = testDataProvider.getSimpleUserExample();
         boolean isUserWrong = targetOfTesting.isWrong(okUser);
         Assertions.assertFalse(isUserWrong);
     }
@@ -26,7 +26,7 @@ final class UserValidatorUnitTest {
     @Test
     void invalidUsername() {
         // denied characters are: "\"\'!@#$%^&*(){}[]\\|/?:;,."
-        User invalidUser = testDataProvider.getNewSimpleUserExample();
+        User invalidUser = testDataProvider.getSimpleUserExample();
         invalidUser.setName("na\"me");
         boolean isUserWrong = targetOfTesting.isWrong(invalidUser);
         Assertions.assertTrue(isUserWrong);
@@ -75,7 +75,7 @@ final class UserValidatorUnitTest {
     @Test
     void invalidLogin() {
         // denied characters are: "\"\'!@#$%^&*(){}[]\\|/?:;,."
-        User invalidUser = testDataProvider.getNewSimpleUserExample();
+        User invalidUser = testDataProvider.getSimpleUserExample();
         invalidUser.setLogin("na\"me");
         boolean isUserWrong = targetOfTesting.isWrong(invalidUser);
         Assertions.assertTrue(isUserWrong);
@@ -119,11 +119,15 @@ final class UserValidatorUnitTest {
         invalidUser.setLogin("");
         isUserWrong = targetOfTesting.isWrong(invalidUser);
         Assertions.assertTrue(isUserWrong);
+
+        invalidUser.setLogin("na me");
+        isUserWrong = targetOfTesting.isWrong(invalidUser);
+        Assertions.assertTrue(isUserWrong);
     }
 
     @Test
     void invalidPassword() {
-        User invalidUser = testDataProvider.getNewSimpleUserExample();
+        User invalidUser = testDataProvider.getSimpleUserExample();
 
         invalidUser.setPassword("");
         boolean isUserWrong = targetOfTesting.isWrong(invalidUser);

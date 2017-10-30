@@ -24,6 +24,7 @@ public final class UserValidatorUnit implements UserValidator {
     private UserValidatorUnit() {
     }
 
+    @Override
     public boolean isWrong(@Nullable User user) {
         if (null == user) {
             return true;
@@ -38,6 +39,12 @@ public final class UserValidatorUnit implements UserValidator {
                 || isPasswordWrong(password));
     }
 
+    @Override
+    public boolean isWrong(@Nullable String login) {
+        return isLoginWrong(login);
+    }
+
+    @Override
     public boolean isWrong(@Nullable String login, @Nullable String password) {
         return (isLoginWrong(login) || isPasswordWrong(password));
     }
@@ -65,7 +72,7 @@ public final class UserValidatorUnit implements UserValidator {
             return true;
         }
 
-        final String allowedLoginPatternDescription = "[\\w ]+";
+        final String allowedLoginPatternDescription = "[\\w]+";
         Pattern allowedLoginPattern = Pattern.compile(allowedLoginPatternDescription);
         Matcher matcher = allowedLoginPattern.matcher(login);
 

@@ -1,7 +1,7 @@
 package ru.bravery_and_stupidity.secretOfSatan.services;
 
-import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Service;
 import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
 import ru.bravery_and_stupidity.secretOfSatan.model.User;
@@ -17,8 +17,6 @@ public final class UserServiceUnit implements UserService {
     private UserRepository repository;
 
     private UserValidator validator;
-
-    private static final Logger log = Logger.getLogger(UserServiceUnit.class);
 
     UserServiceUnit(UserRepository repository, UserValidator validator) {
         this.repository = repository;
@@ -43,9 +41,25 @@ public final class UserServiceUnit implements UserService {
         repository.saveUser(user);
     }
 
+    @Nullable
+    @Override
+    public UserDao getUser(@NotNull String login) {
+        requireValid(login);
+
+        User user = repository.getUser(login);
+        return (null == user) ? null : user.mapToDao();
+    }
+
     private void requireValid(User user) {
         if (validator.isWrong(user)) {
             String diagnostics = "entered data is invalid: " + user.toString();
+            throw new IllegalArgumentException(diagnostics);
+        }
+    }
+
+    private void requireValid(String login) {
+        if (validator.isWrong(login)) {
+            String diagnostics = "login is invalid: " + login;
             throw new IllegalArgumentException(diagnostics);
         }
     }
@@ -66,13 +80,8 @@ public final class UserServiceUnit implements UserService {
 
     private boolean isUserExist(User user) {
         String login = user.getLogin();
-        User userWithSameLogin = repository.getUser(login);
-        return (userWithSameLogin != null);
-    }
-
-    @Override
-    public UserDao getUser(@NotNull String login) {
-        return null;
+        User userWithSpecifiedLogin = repository.getUser(login);
+        return (userWithSpecifiedLogin != null);
     }
 
     @NotNull
