@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import ru.bravery_and_stupidity.secretOfSatan.TestDataProvider;
 
 
-class UserUnitTest {
+final class UserUnitTest {
 
     private TestDataProvider testDataProvider = TestDataProvider.INSTANCE;
 
