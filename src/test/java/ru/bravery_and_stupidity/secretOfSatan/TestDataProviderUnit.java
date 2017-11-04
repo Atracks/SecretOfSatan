@@ -98,6 +98,31 @@ final class TestDataProviderUnit implements TestDataProvider {
 
     @NotNull
     @Override
+    public List<User> getBigListOfUsers() {
+        final int LIST_SIZE = 15;
+        List<User> users = new ArrayList<>(LIST_SIZE);
+        String login = "login";
+        String password = "password";
+        String name = "name";
+        String desire = "desire";
+        String target = "";
+
+        for (int i = 0; i < LIST_SIZE; i++) {
+            User newUser = new User();
+            newUser.setLogin(login + i);
+            newUser.setPassword(password + i);
+            newUser.setName(name + i);
+            newUser.setDesire(desire + i);
+            newUser.setTarget(target);
+            newUser.setAdmin(false);
+            users.add(newUser);
+        }
+
+        return users;
+    }
+
+    @NotNull
+    @Override
     public UserValidator getUserValidator() {
         return UserValidatorUnit.getInstance();
     }
