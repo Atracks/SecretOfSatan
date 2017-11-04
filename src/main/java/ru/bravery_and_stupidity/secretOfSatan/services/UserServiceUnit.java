@@ -8,7 +8,7 @@ import ru.bravery_and_stupidity.secretOfSatan.model.User;
 import ru.bravery_and_stupidity.secretOfSatan.model.UserValidator;
 import ru.bravery_and_stupidity.secretOfSatan.repository.UserRepository;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -87,7 +87,16 @@ public final class UserServiceUnit implements UserService {
     @NotNull
     @Override
     public List<UserDao> getUsers() {
-        return Collections.emptyList();
+        List<User> users = repository.getUsers();
+        return mapToDao(users);
+    }
+
+    private List<UserDao> mapToDao(List<User> users) {
+        List<UserDao> usersData = new ArrayList<>(15);
+        for (User eachUser : users) {
+            usersData.add(eachUser.mapToDao());
+        }
+        return usersData;
     }
 
     @Override
