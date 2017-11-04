@@ -215,11 +215,28 @@ final class UserServiceUnitTest {
         return usersData;
     }
 
-    /*@Test
-    void deleteUser() {
+    @Test
+    void deleteUserCaseHappyPath() {
+        String login = "someValidLoginExample";
+        repositoryMock.deleteUser(login);
+
+        EasyMock.replay(repositoryMock);
+        targetOfTesting.deleteUser(login);
+        EasyMock.verify(repositoryMock);
     }
 
     @Test
+    void deleteUserCaseInvalidLogin() {
+        String invalidLogin = "DROP TABLE users";
+        try {
+            targetOfTesting.deleteUser(invalidLogin);
+            Assertions.fail("an exception must be thrown in case of invalid argument");
+        } catch (IllegalArgumentException expectedException) {
+            // correct work case
+        }
+    }
+
+    /*@Test
     void calculateTargets() {
     }*/
 

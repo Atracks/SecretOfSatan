@@ -50,6 +50,32 @@ public final class UserServiceUnit implements UserService {
         return (null == user) ? null : user.mapToDao();
     }
 
+    @NotNull
+    @Override
+    public List<UserDao> getUsers() {
+        List<User> users = repository.getUsers();
+        return mapToDao(users);
+    }
+
+    private List<UserDao> mapToDao(List<User> users) {
+        List<UserDao> usersData = new ArrayList<>(15);
+        for (User eachUser : users) {
+            usersData.add(eachUser.mapToDao());
+        }
+        return usersData;
+    }
+
+    @Override
+    public void deleteUser(@NotNull String login) {
+        requireValid(login);
+        repository.deleteUser(login);
+    }
+
+    @Override
+    public void calculateTargets() {
+
+    }
+
     private void requireValid(User user) {
         if (validator.isWrong(user)) {
             String diagnostics = "entered data is invalid: " + user.toString();
@@ -82,31 +108,6 @@ public final class UserServiceUnit implements UserService {
         String login = user.getLogin();
         User userWithSpecifiedLogin = repository.getUser(login);
         return (userWithSpecifiedLogin != null);
-    }
-
-    @NotNull
-    @Override
-    public List<UserDao> getUsers() {
-        List<User> users = repository.getUsers();
-        return mapToDao(users);
-    }
-
-    private List<UserDao> mapToDao(List<User> users) {
-        List<UserDao> usersData = new ArrayList<>(15);
-        for (User eachUser : users) {
-            usersData.add(eachUser.mapToDao());
-        }
-        return usersData;
-    }
-
-    @Override
-    public void deleteUser(@NotNull String login) {
-
-    }
-
-    @Override
-    public void calculateTargets() {
-
     }
 
 }
