@@ -10,6 +10,9 @@ import ru.bravery_and_stupidity.secretOfSatan.model.User;
 import ru.bravery_and_stupidity.secretOfSatan.model.UserValidator;
 import ru.bravery_and_stupidity.secretOfSatan.repository.UserRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 final class UserServiceUnitTest {
 
@@ -63,7 +66,7 @@ final class UserServiceUnitTest {
         addUserCaseLoginIsNotUniquePrepareMocks(userData);
 
         EasyMock.replay(repositoryMock);
-        try{
+        try {
             targetOfTesting.addUser(userData);
             Assertions.fail("an exception must be thrown in case of invalid argument");
         } catch (IllegalArgumentException expectedException) {
@@ -174,7 +177,7 @@ final class UserServiceUnitTest {
 
     @Test
     void getUserCaseInvalidLogin() {
-        String invalidLogin = "DROP TABLE users";
+        String invalidLogin = ";DROP TABLE users;";
         try {
             targetOfTesting.getUser(invalidLogin);
             Assertions.fail("an exception must be thrown in case of invalid argument");
@@ -183,11 +186,36 @@ final class UserServiceUnitTest {
         }
     }
 
-    /*@Test
-    void getUsers() {
+    @Test
+    void getUsersCaseHappyPath() {
+        List<UserDao> expected = getUsersCaseHappyPathPrepareMocks();
+
+        EasyMock.replay(repositoryMock);
+        List<UserDao> actual = targetOfTesting.getUsers();
+        EasyMock.verify(repositoryMock);
+
+        Assertions.assertNotNull(actual);
+        Assertions.assertEquals(expected.size(), actual.size());
+        for (int i = 0; i < expected.size(); i++) {
+            UserDao eachExpected = expected.get(i);
+            UserDao eachActual = actual.get(i);
+            Assertions.assertEquals(eachExpected, eachActual);
+        }
     }
 
-    @Test
+    private List<UserDao> getUsersCaseHappyPathPrepareMocks() {
+        List<User> users = testDataProvider.getSimpleListOfUsers();
+        repositoryMock.getUsers();
+        EasyMock.expectLastCall().andReturn(users);
+
+        List<UserDao> usersData = new ArrayList<>();
+        for (User user : users) {
+            usersData.add(user.mapToDao());
+        }
+        return usersData;
+    }
+
+    /*@Test
     void deleteUser() {
     }
 

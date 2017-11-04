@@ -5,6 +5,8 @@ import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
 import ru.bravery_and_stupidity.secretOfSatan.model.User;
 import ru.bravery_and_stupidity.secretOfSatan.model.UserValidator;
 
+import java.util.List;
+
 public interface TestDataProvider {
 
     TestDataProvider INSTANCE = new TestDataProviderUnit();
@@ -17,6 +19,9 @@ public interface TestDataProvider {
 
     @NotNull
     User getSimpleUserExample();
+
+    @NotNull
+    List<User> getSimpleListOfUsers();
 
     @NotNull
     UserValidator getUserValidator();
