@@ -24,6 +24,9 @@ public interface TestDataProvider {
     List<User> getSimpleListOfUsers();
 
     @NotNull
+    List<User> getBigListOfUsers();
+
+    @NotNull
     UserValidator getUserValidator();
 
 }

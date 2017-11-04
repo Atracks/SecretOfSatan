@@ -8,11 +8,15 @@ import ru.bravery_and_stupidity.secretOfSatan.model.User;
 import ru.bravery_and_stupidity.secretOfSatan.model.UserValidator;
 import ru.bravery_and_stupidity.secretOfSatan.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Random;
 
 @Service
 public final class UserServiceUnit implements UserService {
+
+    private static final Random DICE = new Random();
 
     private UserRepository repository;
 
@@ -71,11 +75,6 @@ public final class UserServiceUnit implements UserService {
         repository.deleteUser(login);
     }
 
-    @Override
-    public void calculateTargets() {
-
-    }
-
     private void requireValid(User user) {
         if (validator.isWrong(user)) {
             String diagnostics = "entered data is invalid: " + user.toString();
@@ -108,6 +107,58 @@ public final class UserServiceUnit implements UserService {
         String login = user.getLogin();
         User userWithSpecifiedLogin = repository.getUser(login);
         return (userWithSpecifiedLogin != null);
+    }
+
+    @Override
+    public void calculateTargets() {
+        List<User> users = repository.getUsers();
+        if (users.size() < 2) {
+            throw new IllegalStateException("unable to calculate targets: at least 2 users required");
+        }
+
+        boolean success = false;
+        while (!success) {
+            success = tryCalculateTargets(users);
+        }
+    }
+
+    private boolean tryCalculateTargets(List<User> users) {
+        List<User> unprocessed = new LinkedList<>(users);
+
+        int upperBound = unprocessed.size();
+
+        for (User each : users) {
+            User target = roll(upperBound, unprocessed, each);
+            if (null == target) {
+                return false;
+            }
+
+            each.setTarget(target.getLogin());
+            repository.saveUser(each);
+
+            unprocessed.remove(target);
+            --upperBound;
+        }
+
+        return true;
+    }
+
+    private User roll(int bound, List<User> availableUsers, User denied) {
+        if (needRecalculate(bound, availableUsers, denied)) {
+            return null;
+        }
+
+        User chosen;
+        do {
+            int random = DICE.nextInt(bound);
+            chosen = availableUsers.get(random);
+        } while (chosen.equals(denied));
+
+        return chosen;
+    }
+
+    private boolean needRecalculate(int bound, List<User> availableUsers, User denied) {
+        return (bound == 1) && (availableUsers.size() == 1) && denied.equals(availableUsers.get(0));
     }
 
 }

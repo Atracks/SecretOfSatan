@@ -11,7 +11,11 @@ import ru.bravery_and_stupidity.secretOfSatan.model.UserValidator;
 import ru.bravery_and_stupidity.secretOfSatan.repository.UserRepository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 
 final class UserServiceUnitTest {
@@ -236,8 +240,91 @@ final class UserServiceUnitTest {
         }
     }
 
-    /*@Test
+    @Test
+    void iterativeCalculateTargets() {
+        for (int i = 0; i < 1000; i++) {
+            calculateTargets();
+            EasyMock.reset(repositoryMock);
+        }
+    }
+
+    @Test
     void calculateTargets() {
-    }*/
+        List<User> users = calculateTargetsPrepareMocks();
+
+        EasyMock.replay(repositoryMock);
+        targetOfTesting.calculateTargets();
+        EasyMock.verify(repositoryMock);
+
+        checkThatEveryTargetIsUnique(users);
+        checkThatEveryUserIsSomeonesTarget(users);
+        checkThatEveryUserHaveTargets(users);
+        checkThatEveryTargetIsNotSameUser(users);
+    }
+
+    private List<User> calculateTargetsPrepareMocks() {
+        List<User> users = testDataProvider.getBigListOfUsers();
+        repositoryMock.getUsers();
+        EasyMock.expectLastCall().andReturn(users);
+
+        repositoryMock.saveUser(EasyMock.anyObject(User.class));
+        EasyMock.expectLastCall().anyTimes();
+
+        return users;
+    }
+
+    private void checkThatEveryTargetIsUnique(List<User> users) {
+        Set<String> targets = new HashSet<>(users.size());
+        for (User each : users) {
+            targets.add(each.getTarget());
+        }
+        Assertions.assertEquals(users.size(), targets.size(), "there are users with same targets");
+    }
+
+    private void checkThatEveryUserIsSomeonesTarget(List<User> users) {
+        List<String> logins = new ArrayList<>(users.size());
+        List<String> targets = new ArrayList<>(users.size());
+
+        for (User user : users) {
+            logins.add(user.getLogin());
+            targets.add(user.getTarget());
+        }
+
+        Assertions.assertEquals(logins.size(), targets.size());
+        Assertions.assertTrue(targets.containsAll(logins));
+    }
+
+    private void checkThatEveryUserHaveTargets(List<User> users) {
+        String diagnostics = "target is not appointed for users:";
+        checkConditionForEveryUser(users, user -> user.getTarget().isEmpty(), diagnostics);
+    }
+
+    private void checkThatEveryTargetIsNotSameUser(List<User> users) {
+        String diagnostics = "target is the same user for:";
+        checkConditionForEveryUser(users, user -> user.getTarget().equals(user.getLogin()), diagnostics);
+    }
+
+    private void checkConditionForEveryUser(List<User> users, Predicate<User> condition, String errorText) {
+        List<User> invalidUsers = users
+                .stream()
+                .filter(condition)
+                .collect(Collectors.toList());
+
+        if (invalidUsers.isEmpty()) {
+            // all correct
+            return;
+        }
+
+        String diagnostics = composeDiagnostics(invalidUsers, errorText);
+        Assertions.fail(diagnostics);
+    }
+
+    private String composeDiagnostics(List<User> invalidUsers, String description) {
+        StringBuilder diagnostics = new StringBuilder(description);
+        for (User each : invalidUsers) {
+            diagnostics.append(" ").append(each.getLogin());
+        }
+        return diagnostics.toString();
+    }
 
 }
