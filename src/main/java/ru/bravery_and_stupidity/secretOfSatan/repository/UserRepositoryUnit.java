@@ -34,7 +34,8 @@ class UserRepositoryUnit implements UserRepository {
     @Override
     public void deleteUser(@NotNull String login) {
         String query = "DELETE FROM User WHERE login = :login";
-        storage.createQuery(query, User.class)
+        storage.createQuery(query)
+                .setParameter("login", login)
                 .executeUpdate();
     }
 
