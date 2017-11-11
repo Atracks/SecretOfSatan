@@ -3,6 +3,7 @@ package ru.bravery_and_stupidity.secretOfSatan.services;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
 import ru.bravery_and_stupidity.secretOfSatan.model.User;
 import ru.bravery_and_stupidity.secretOfSatan.model.UserValidator;
@@ -28,6 +29,7 @@ public final class UserServiceUnit implements UserService {
     }
 
     @Override
+    @Transactional
     public void addUser(@NotNull UserDao userData) {
         User user = userData.mapToModel();
         requireValid(user);
@@ -37,6 +39,7 @@ public final class UserServiceUnit implements UserService {
     }
 
     @Override
+    @Transactional
     public void updateUser(@NotNull UserDao userData) {
         User user = userData.mapToModel();
         requireValid(user);
@@ -70,6 +73,7 @@ public final class UserServiceUnit implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUser(@NotNull String login) {
         requireValid(login);
         repository.deleteUser(login);
