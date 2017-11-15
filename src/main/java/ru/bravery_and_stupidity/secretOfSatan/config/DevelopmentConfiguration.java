@@ -22,12 +22,10 @@ public class DevelopmentConfiguration {
     @Bean(name = "datasource")
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        //FIXME выбрать БД
         dataSource.setDriverClassName("org.postgresql.Driver");
-        //dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        //dataSource.setUrl("jdbc:mysql://localhost:3306/trackerdb?useUnicode=true&characterEncoding=utf8");
-        //dataSource.setUsername("login");
-        //dataSource.setPassword("pass");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/secret?useUnicode=true&characterEncoding=utf8");
+        dataSource.setUsername("santa");
+        dataSource.setPassword("15320666a");
         return dataSource;
     }
 
