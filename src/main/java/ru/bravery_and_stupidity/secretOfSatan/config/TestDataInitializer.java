@@ -24,7 +24,8 @@ public class TestDataInitializer {
 
         User user = new User();
         user.setName("username");
-        user.setLogin("somelogin");
+        user.setLogin("someLogin");
+        user.setPassword("somePass");
 
         session.persist(user);
         transaction.commit();

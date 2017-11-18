@@ -45,7 +45,7 @@ public class TestConfiguration {
         entityManagerFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Map<String, Object> jpaProperties = new HashMap<>();
-        jpaProperties.put("hibernate.hbm2ddl.auto", "update");
+        jpaProperties.put("hibernate.hbm2ddl.auto", "create");
         jpaProperties.put("hibernate.show_sql", "true");
         jpaProperties.put("hibernate.format_sql", "true");
         jpaProperties.put("hibernate.use_sql_comments", "true");
