@@ -2,6 +2,7 @@ package ru.bravery_and_stupidity.secretOfSatan.services;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
@@ -19,6 +20,7 @@ public final class UserServiceUnit implements UserService {
 
     private static final Random DICE = new Random();
 
+    @Autowired
     private UserRepository repository;
 
     private UserValidator validator;
