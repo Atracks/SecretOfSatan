@@ -22,13 +22,12 @@ final public class SecurityUserDetailsService implements UserDetailsService {
     private static final Logger LOGGER = Logger.getLogger(SecurityUserDetailsService.class);
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
 
     @NotNull
     @Override
     public UserDetails loadUserByUsername(String login) throws IllegalArgumentException {
-        //FIXME
-        User user = userRepository.getUsers().get(0);
+        User user = repository.getUser(login);
         Assert.notNull(user,"user with login: " + login + " not found");
         LOGGER.info("Found user in database: " + user);
         return new org.springframework.security.core.userdetails.User(login, user.getPassword(), setUserRole(user.isAdmin()));

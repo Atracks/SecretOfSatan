@@ -105,8 +105,6 @@ public class User {
         return dao;
     }
 
-    // TODO: replace constructor with instantiation with builder
-
     @Override
     public boolean equals(Object entity) {
         if (this == entity) {
