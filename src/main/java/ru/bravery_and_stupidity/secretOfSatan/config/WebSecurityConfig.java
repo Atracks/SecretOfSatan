@@ -3,13 +3,13 @@ package ru.bravery_and_stupidity.secretOfSatan.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import com.allanditzel.springframework.security.web.csrf.CsrfTokenResponseHeaderBindingFilter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import ru.bravery_and_stupidity.secretOfSatan.security.AjaxAuthenticationSuccessHandler;
 import ru.bravery_and_stupidity.secretOfSatan.security.SecurityUserDetailsService;
 
 @Configuration
@@ -26,26 +26,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        CsrfTokenResponseHeaderBindingFilter csrfTokenFilter = new CsrfTokenResponseHeaderBindingFilter();
-        http.addFilterAfter(csrfTokenFilter, CsrfFilter.class);
         http
+            .csrf().disable()
             .authorizeRequests()
-            .antMatchers("/resources/public/**").permitAll()
+            .antMatchers("/bootstrap/**").permitAll()
+            .antMatchers("/css/**").permitAll()
+            .antMatchers("/js/**").permitAll()
+            .antMatchers("/img/**").permitAll()
+            .antMatchers("/login/new-user.html").permitAll()
+            .antMatchers("/").permitAll()
             .antMatchers(HttpMethod.POST, "/users/addUser").permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin()
-            .defaultSuccessUrl("/resources/account.html")
-            .loginProcessingUrl("/authenticate")
             .usernameParameter("username")
             .passwordParameter("password")
-            //.loginPage("/resources/public/index.html")
-            .and()
-            .httpBasic()
+            .loginProcessingUrl("/authenticate")
+            .successHandler(new AjaxAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler()))
+            .loginPage("/login/login.html")
+            .permitAll()
             .and()
             .logout()
             .logoutUrl("/logout")
-            .logoutSuccessUrl("/resources/public/login.html")
+            .logoutSuccessUrl("/login/login.html")
             .permitAll();
     }
 }
