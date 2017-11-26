@@ -1,5 +1,7 @@
 /* app css stylesheet */
 
+.background_picture {img src="santa_background_1.jpg"}
+
 #wrapper {
     margin: 0 auto;
     width: 650px;

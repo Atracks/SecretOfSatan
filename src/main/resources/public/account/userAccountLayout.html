@@ -1,0 +1,14 @@
+<div class="alert alert-danger" role="alert" ng-show="error">
+    {{errorMessage}}
+</div>
+
+<h3 style="margin-left:100px;">Santa secret</h3>
+<div>{{user.name}}</div>
+Letter to Santa:
+<div class="input-append">
+    <input style="width:358px; height:500px;" class="span2" type="text" ng-model="user.desire"/>
+</div>
+<button style="margin-top:10px;" class="btn btn-primary">send letter to Santa</button>
+<div class="background_picture" style="width:400px;margin-left:100px;" ng-show="users.length == 0">
+    User list is empty yet
+</div>

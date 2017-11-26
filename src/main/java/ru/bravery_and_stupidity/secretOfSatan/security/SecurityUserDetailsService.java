@@ -1,7 +1,7 @@
 package ru.bravery_and_stupidity.secretOfSatan.security;
 
 
-import org.apache.log4j.Logger;
+/*import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -42,4 +42,4 @@ final public class SecurityUserDetailsService implements UserDetailsService {
         authorities.add(new SimpleGrantedAuthority(role));
         return authorities;
     }
-}
+}*/
