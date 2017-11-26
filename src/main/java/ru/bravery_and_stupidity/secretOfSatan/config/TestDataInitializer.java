@@ -28,8 +28,9 @@ public class TestDataInitializer {
         user.setName("username");
         user.setLogin("someLogin");
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode("somePass");
+        String encodedPassword = passwordEncoder.encode("somePass123");
         user.setPassword(encodedPassword);
+        user.setAdmin(true);
 
         session.persist(user);
         transaction.commit();

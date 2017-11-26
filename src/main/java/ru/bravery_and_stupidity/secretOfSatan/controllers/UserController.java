@@ -4,10 +4,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
 import ru.bravery_and_stupidity.secretOfSatan.services.UserService;
-
 import java.util.List;
 
 @RestController
@@ -52,6 +53,13 @@ public class UserController {
     @ResponseBody
     public void calculateTargets() {
         userService.calculateTargets();
+    }
+
+    @RequestMapping(value = "/currentUserRole", method = RequestMethod.GET)
+    @ResponseBody
+    public List<GrantedAuthority> getCurrentUserRole() {
+        logger.info(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+        return (List<GrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
     }
 
     @ExceptionHandler(Exception.class)

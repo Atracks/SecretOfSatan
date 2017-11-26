@@ -5,27 +5,21 @@ var AngularSpringApp = {};
 var App = angular.module('AngularSpringApp', ['AngularSpringApp.filters', 'AngularSpringApp.services', 'AngularSpringApp.directives']);
 
 App.config(['$routeProvider', function ($routeProvider) {
-  /*$routeProvider.when('/login', {
-    templateUrl: 'login/loginLayout.html',
-    controller: loginController
+  $routeProvider.when('/new-user', {
+    templateUrl: 'login/new-user.html',
+    controller: newUserController
   });
-
-  $routeProvider.when('/account', {
-    templateUrl: 'account/accountLayout.html',
-    controller: accountController
-  });
-
-  $routeProvider.when('/account-update', {
-    templateUrl: 'account/accountUpdateLayout.html',
-    controller: accountUpdateController
-  });*/
 
   $routeProvider.when('/admin-account', {
-    templateUrl: 'account/adminAccountLayout.html',
+    templateUrl: 'account/admin-account.html',
     controller: adminAccountController
   });
 
-  //$routeProvider.otherwise({redirectTo: '/login'});
+  $routeProvider.when('/login', {
+      templateUrl: 'login/login.html',
+      controller: loginController
+  });
+  $routeProvider.otherwise({redirectTo: '/login'});
 }]);
 
 
