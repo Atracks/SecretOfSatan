@@ -4,10 +4,12 @@ package ru.bravery_and_stupidity.secretOfSatan.security;
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.bravery_and_stupidity.secretOfSatan.model.User;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Component
 final public class SecurityUserDetailsService implements UserDetailsService {
 
     private static final Logger LOGGER = Logger.getLogger(SecurityUserDetailsService.class);
@@ -27,8 +30,7 @@ final public class SecurityUserDetailsService implements UserDetailsService {
     @NotNull
     @Override
     public UserDetails loadUserByUsername(String login) throws IllegalArgumentException {
-        //FIXME
-        User user = userRepository.getUsers().get(0);
+        User user = userRepository.getUser(login);
         Assert.notNull(user,"user with login: " + login + " not found");
         LOGGER.info("Found user in database: " + user);
         return new org.springframework.security.core.userdetails.User(login, user.getPassword(), setUserRole(user.isAdmin()));

@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManagerFactory;
@@ -25,7 +27,10 @@ public class TestDataInitializer {
         User user = new User();
         user.setName("username");
         user.setLogin("someLogin");
-        user.setPassword("somePass");
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode("somePass123");
+        user.setPassword(encodedPassword);
+        user.setAdmin(true);
 
         session.persist(user);
         transaction.commit();

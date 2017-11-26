@@ -35,3 +35,10 @@
     content: "";
     padding: 0;
 }
+
+@media screen and (min-width: 14em) {
+    .login-container {
+        max-width: 14em;
+        margin: 0 auto;
+    }
+}
