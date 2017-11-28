@@ -58,7 +58,6 @@ public class UserController {
     @RequestMapping(value = "/currentUserRole", method = RequestMethod.GET)
     @ResponseBody
     public List<GrantedAuthority> getCurrentUserRole() {
-        logger.info(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
         return (List<GrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
     }
 

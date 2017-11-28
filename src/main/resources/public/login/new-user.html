@@ -11,58 +11,32 @@
 
     <main ng-controller="newUserController">
 
-        <tt-error-messages extra-styles="access-screen"></tt-error-messages>
+        <div class="alert alert-danger" role="alert" ng-show="error">
+            {{errorMessage}}
+        </div>
 
         <div class="login-container">
 
-            <form name="form" ng-submit="createUser()" class="pure-form login-form" novalidate>
+            <form name="form" ng-submit="onCreateUser()" class="pure-form login-form" novalidate>
                 <fieldset class="pure-group">
                     <legend>New User?</legend>
                     <div class="form-field">
-                        <input type="text" ng-focus="focus('username')" ng-blur="blur('username')" ng-model="vm.username"
-                               name="username" class="pure-input-1" placeholder="Username" required ng-minlength="6">
-
-                        <div class="error-messages" ng-show="isMessagesVisible('username')" ng-messages="form.username.$error"
-                             ng-cloak>
-                            <div ng-message="required">The username is mandatory</div>
-                            <div ng-message="minlength">must have minimum 6 characters</div>
-                        </div>
+                        <input type="text" ng-model="login"
+                               name="login" class="pure-input-1" placeholder="Login">
                     </div>
+
                     <div class="form-field">
-                        <input type="email" ng-focus="focus('email')" ng-blur="blur('email')" ng-model="vm.email"
-                               name="email" class="pure-input-1" placeholder="Email" required>
-
-                        <div class="error-messages" ng-show="isMessagesVisible('email')" ng-messages="form.email.$error"
-                             ng-cloak>
-                            <div ng-message="required">The email is mandatory</div>
-                            <div ng-message="email">must be a valid email</div>
-                        </div>
+                        <input type="text" ng-model="casualName"
+                               name="casualName" class="pure-input-1" placeholder="Casual name">
                     </div>
+
                     <div class="form-field">
-                        <input type="password" ng-focus="focus('password')" ng-blur="blur('password')"
-                               ng-model="vm.password" name="password" class="pure-input-1" placeholder="Password"
-                               required ng-minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}">
-
-                        <div class="error-messages" ng-show="isMessagesVisible('password')" ng-messages="form.password.$error"
-                             ng-cloak>
-                            <div ng-message="required">The password is mandatory</div>
-                            <div ng-message="minlength">must have minimum 6 characters</div>
-                            <div ng-message="pattern">At least one number and uppercase</div>
-                        </div>
+                        <input type="password" ng-model="password" name="password" class="pure-input-1" placeholder="Password">
                     </div>
+
                     <div class="last-form-field">
-                        <input type="password" ng-focus="focus('confirmPassword')" ng-blur="blur('confirmPassword')"
-                               ng-model="vm.confirmPassword" name="confirmPassword" class="pure-input-1"
-                               placeholder="Confirm Password" required ng-minlength="6"
-                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" check-passwords-match>
-
-                        <div class="error-messages" ng-show="isMessagesVisible('confirmPassword')"
-                             ng-messages="form.confirmPassword.$error" ng-cloak>
-                            <div ng-message="required">The password is mandatory</div>
-                            <div ng-message="minlength">must have minimum 6 characters</div>
-                            <div ng-message="pattern">At least one number and uppercase</div>
-                            <div ng-message="checkPasswordsMatch">Passwords must match</div>
-                        </div>
+                        <input type="password" ng-model="confirmPassword" name="confirmPassword" class="pure-input-1"
+                               placeholder="Confirm Password">
                     </div>
                 </fieldset>
 
