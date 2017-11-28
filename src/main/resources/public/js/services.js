@@ -29,6 +29,22 @@ AppServices.service('loginService', ['$http','$q', function($http) {
     }
 }]);
 
+AppServices.service('newUserService', ['$http', function ($http) {
+    return {
+        createUser: function (login, casualName, password) {
+            var userDao = {
+                login: login,
+                password: password,
+                name: casualName,
+                desire: '',
+                targetLogin: ''
+            }
+            return $http.post('users/addUser', userDao);
+        }
+    }
+    
+}])
+
 
 
 

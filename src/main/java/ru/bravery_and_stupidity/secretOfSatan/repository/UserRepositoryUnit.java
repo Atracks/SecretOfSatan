@@ -2,6 +2,8 @@ package ru.bravery_and_stupidity.secretOfSatan.repository;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import ru.bravery_and_stupidity.secretOfSatan.model.User;
 
@@ -17,6 +19,9 @@ class UserRepositoryUnit implements UserRepository {
 
     @Override
     public void saveUser(@NotNull User user) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         storage.merge(user);
     }
 
