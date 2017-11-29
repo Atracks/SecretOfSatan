@@ -1,20 +1,28 @@
 'use strict';
 
 var loginController = function($scope, $http, loginService) {
-    $scope.error = false;
-    $scope.errorMessage = '';
+    resetError();
 
     $scope.onLogin = function () {
         loginService.login($scope.login, $scope.password).then(function (response) {
             if (response.data === 'ok') {
-                $scope.error = false;
+                resetError();
                 replaceToAccount();
             } else {
-                $scope.error = true;
-                $scope.errorMessage = "Wrong username or password"
+                setError("Wrong username or password");
             }
         })
     };
+
+    function setError(errorMessage) {
+        $scope.error = true;
+        $scope.errorMessage = errorMessage;
+    }
+
+    function resetError() {
+        $scope.error = false;
+        $scope.errorMessage = '';
+    }
 
     function replaceToAccount() {
         loginService.getCurrentUserRole().success(function (currentUserRole) {
@@ -24,10 +32,9 @@ var loginController = function($scope, $http, loginService) {
             if(currentUserRole[0].authority === "ROLE_USER") {
                 window.location.replace('#/user-account');
             }
-            $scope.error = false;
+            resetError();
         }).error(function () {
-            $scope.error = true;
-            $scope.errorMessage = 'Get user role error';
+            setError("Get user role error");
         })
     }
 }

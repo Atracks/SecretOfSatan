@@ -79,7 +79,6 @@ public final class UserValidatorUnit implements UserValidator {
         if (!matcher.matches()) {
             log.info("invalid login: " + login);
             return true;
-
         }
         return false;
     }
