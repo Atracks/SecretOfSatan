@@ -3,8 +3,8 @@
 .background_picture {img src="santa_background_1.jpg"}
 
 #wrapper {
-    margin: 0 auto;
-    width: 650px;
+    margin: auto;
+    width: 1000px;
     margin-top: 50px;
 }
 

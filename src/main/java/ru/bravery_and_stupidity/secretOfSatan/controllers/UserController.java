@@ -24,7 +24,7 @@ public class UserController {
         userService.addUser(user);
     }
 
-    @RequestMapping(value = "/updateUser", method = RequestMethod.PATCH)
+    @RequestMapping(value = "/updateUser", method = RequestMethod.PUT)
     @ResponseBody
     public void updateUser(@RequestBody UserDao user) {
         userService.updateUser(user);

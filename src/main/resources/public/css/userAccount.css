@@ -1,0 +1,64 @@
+/* composite styles ******************************************************************************/
+/* width + centered */
+.userAccount{
+    width: 720px;
+    margin: auto;
+}
+
+/* button */
+.simpleButton {
+    width: 150px;
+}
+.successButton {
+    width: 150px;
+    color: #fff;
+    background-color: #449d44;
+    border-color: #419641;
+}
+
+/* simple styles *********************************************************************************/
+/* width */
+.fullWidth{
+    width: 100%;
+}
+.halfWidth{
+    width: 50%;
+}
+
+/* horizontal position */
+.centeredText{
+    text-align: center;
+}
+.centered{
+    margin: auto;
+}
+.rightAligned{
+    float:right;
+    clear:right;
+}
+
+/* vertical position */
+tr.topAlign{
+    vertical-align: top;
+}
+.contentGravityTop{
+    display: flex;
+}
+.elementMarginTop{
+    margin-top: 1px;
+}
+
+/* padding */
+.padding{
+    padding: 5px;
+}
+
+/* borders */
+.border{
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+.noBorder{
+    border-width: 0px;
+}
