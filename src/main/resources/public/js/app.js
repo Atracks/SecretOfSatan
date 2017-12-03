@@ -28,9 +28,9 @@ App.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/user-account', {
       templateUrl: 'account/userAccountLayout.html',
       controller: userAccountController
-    });
+  });
 
-  //$routeProvider.otherwise({redirectTo: '/login'});
+  $routeProvider.otherwise({redirectTo: '/user-account'});
 }]);
 
 

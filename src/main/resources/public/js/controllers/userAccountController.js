@@ -45,19 +45,6 @@ var userAccountController = function($scope, $http, userAccountService) {
             });
     }
 
-    /*$scope.getTarget = function() {
-        if ($scope.user.target.length > 0) {
-            userAccountService.getUser($scope.user.target)
-                .success(function(target) {
-                    $scope.targetName = target.name;
-                    $scope.targetDesire = target.desire;
-                })
-                .error(function() {
-                    setError('target exist, but not available');
-                });
-        }
-    }*/
-
     function setError (message) {
         $scope.error = true;
         $scope.errorMessage = message;
