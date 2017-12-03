@@ -2,41 +2,58 @@
     {{errorMessage}}
 </div>
 
-<h3 class="userAccount centeredText">Santa secret</h3>
+<div class="userAccount padding">
+    User: <u>{{user.name}}</u>
+    <a class="rightAligned"
+        href="#/login"
+        title="log out">
+        <img class="exitButton" src="/../img/exit.jpeg">
+    </a>
+</div>
 
-<div class="userAccount">{{user.name}}</div>
-
-<table class="userAccount noBorder">
+<table class="userAccount noBorder margin">
     <tr>
-        <td class="halfWidth noBorder">
-            Letter to Santa:
+        <td class="halfWidth noBorder padding">
+            <div ng-show="!targetIsAppointed">
+                Letter to Santa:
+            </div>
+            <div ng-show="targetIsAppointed">
+                Need to make present to <u>{{targetName}}</u>.
+                <br/><u>{{targetName}}</u> asks Santa about:
+            </div>
         </td>
-        <td class="halfWidth noBorder" ng-show="targetIsAppointed">
-            Need to make present to {{targetName}}.
-            <br/>{{targetName}} asks Santa about:
+        <td class="halfWidth noBorder">
+            <!-- empty cell -->
         </td>
     </tr>
 
     <tr class="topAlign">
         <td class="halfWidth noBorder padding">
-            <input class="fullWidth"
-                   style="height:500px;"
+            <input class="dataWindow"
                    type="text"
-                   ng-model="user.desire"/>
+                   ng-model="user.desire"
+                   ng-show="!targetIsAppointed"/>
+            <input class="dataWindow"
+                   type="text"
+                   ng-model="targetDesire"
+                   ng-show="targetIsAppointed"/>
         </td>
         <td class="halfWidth noBorder padding">
-            <input class="fullWidth"
-                    style="height:500px;"
-                    type="text"
-                    ng-model="targetDesire"
-                    ng-show="targetIsAppointed"/>
+            <img src="/../img/santa_o_O.jpg"
+                 class="centralPicture"
+                 ng-show="!targetIsAppointed">
+            <img src="/../img/santa_with_elvens.jpg"
+                 class="centralPicture"
+                 ng-show="targetIsAppointed">
         </td>
     </tr>
 </table>
-<div class="userAccount">
+<div class="userAccount padding">
     <button class="elementMarginTop simpleButton btn btn-primary"
-            ng-disabled="targetIsAppointed"
+            ng-show="!targetIsAppointed"
             ng-click="updateUser(user)">Send letter to Santa</button>
-    <button class="successButton"
-            ng-show="letterIsSent">Success</button>
+    <div class="successMarker centeredText"
+        ng-show="letterIsSent">
+        Success
+    </div>
 </div>
