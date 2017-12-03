@@ -15,8 +15,13 @@ AppServices.service('userAccountService', ['$http','$q', function($http) {
         getUser: function(login) {
             return $http.get('users/getUser/' + login)
         },
+
         updateUser: function(user) {
             return $http.put('users/updateUser', user)
+        },
+
+        getCurrentUserLogin: function() {
+            return $http.get('users/getCurrentUserLogin/')
         }
     }
 }]);
