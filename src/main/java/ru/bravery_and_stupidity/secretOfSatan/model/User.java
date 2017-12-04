@@ -2,6 +2,7 @@ package ru.bravery_and_stupidity.secretOfSatan.model;
 
 
 import org.jetbrains.annotations.NotNull;
+import org.hibernate.annotations.Type;
 import ru.bravery_and_stupidity.secretOfSatan.dao.UserDao;
 
 import javax.persistence.*;
@@ -33,6 +34,7 @@ public class User {
     @Column(name = "desire")
     private String desire = NOT_INITIALIZED;
 
+    @Type(type = "boolean")
     @Basic
     @Column(name = "isAdmin")
     private boolean isAdmin = false;
@@ -104,8 +106,6 @@ public class User {
         dao.setTarget(target);
         return dao;
     }
-
-    // TODO: replace constructor with instantiation with builder
 
     @Override
     public boolean equals(Object entity) {

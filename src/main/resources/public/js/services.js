@@ -10,6 +10,17 @@ AppServices.service('adminAccountService', ['$http','$q', function($http) {
     }
 }]);
 
+AppServices.service('userAccountService', ['$http','$q', function($http) {
+    return {
+        getUser: function(login) {
+            return $http.get('users/getUser/' + login)
+        },
+        updateUser: function(user) {
+            return $http.put('users/updateUser', user)
+        }
+    }
+}]);
+
 AppServices.service('loginService', ['$http','$q', function($http) {
     return {
         login: function (username, password) {
@@ -42,7 +53,7 @@ AppServices.service('newUserService', ['$http', function ($http) {
             return $http.post('users/addUser', userDao);
         }
     }
-    
+
 }])
 
 

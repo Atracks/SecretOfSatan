@@ -15,6 +15,11 @@ App.config(['$routeProvider', function ($routeProvider) {
     controller: adminAccountController
   });
 
+  $routeProvider.when('/user-account', {
+        templateUrl: 'account/userAccountLayout.html',
+        controller: userAccountController
+  });
+
   $routeProvider.when('/login', {
       templateUrl: 'login/login.html',
       controller: loginController

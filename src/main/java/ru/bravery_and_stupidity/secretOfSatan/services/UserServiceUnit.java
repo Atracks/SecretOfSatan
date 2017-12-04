@@ -20,7 +20,6 @@ public final class UserServiceUnit implements UserService {
 
     private static final Random DICE = new Random();
 
-    @Autowired
     private UserRepository repository;
 
     private UserValidator validator;
