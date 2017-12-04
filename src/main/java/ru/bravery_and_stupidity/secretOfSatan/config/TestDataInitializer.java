@@ -28,12 +28,57 @@ public class TestDataInitializer {
         user.setName("username");
         user.setLogin("someLogin");
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode("somePass123");
+        String encodedPassword = passwordEncoder.encode("somePass1");
         user.setPassword(encodedPassword);
         user.setAdmin(true);
-
         session.persist(user);
+
+        user = new User();
+        user.setName("username2");
+        user.setLogin("someLogin2");
+        user.setDesire("Big black ass");
+        passwordEncoder = new BCryptPasswordEncoder();
+        encodedPassword = passwordEncoder.encode("somePass2");
+        user.setPassword(encodedPassword);
+        user.setAdmin(false);
+        session.persist(user);
+
+        user = new User();
+        user.setName("username3");
+        user.setLogin("someLogin3");
+        passwordEncoder = new BCryptPasswordEncoder();
+        encodedPassword = passwordEncoder.encode("somePass3");
+        user.setPassword(encodedPassword);
+        user.setAdmin(false);
+        session.persist(user);
+
+        user = new User();
+        user.setName("username4");
+        user.setLogin("someLogin4");
+        passwordEncoder = new BCryptPasswordEncoder();
+        encodedPassword = passwordEncoder.encode("somePass4");
+        user.setPassword(encodedPassword);
+        user.setAdmin(false);
+        session.persist(user);
+
+        user = new User();
+        user.setName("username5");
+        user.setLogin("someLogin5");
+        passwordEncoder = new BCryptPasswordEncoder();
+        encodedPassword = passwordEncoder.encode("somePass5");
+        user.setPassword(encodedPassword);
+        user.setAdmin(false);
+        session.persist(user);
+
+        user = new User();
+        user.setName("username6");
+        user.setLogin("someLogin6");
+        passwordEncoder = new BCryptPasswordEncoder();
+        encodedPassword = passwordEncoder.encode("somePass6");
+        user.setPassword(encodedPassword);
+        user.setAdmin(false);
+        session.persist(user);
+
         transaction.commit();
     }
-
 }

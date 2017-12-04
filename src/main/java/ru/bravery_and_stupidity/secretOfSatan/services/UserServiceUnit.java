@@ -116,6 +116,7 @@ public final class UserServiceUnit implements UserService {
     }
 
     @Override
+    @Transactional
     public void calculateTargets() {
         List<User> users = repository.getUsers();
         if (users.size() < 2) {

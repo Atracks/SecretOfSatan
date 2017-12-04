@@ -1,32 +1,41 @@
-<div class="alert alert-danger" role="alert" ng-show="error">
-    {{errorMessage}}
-</div>
-
-<h3 style="margin-left:100px;">User list</h3>
-<div class="alert alert-info" style="width:400px;margin-left:100px;" ng-show="users.length == 0">
-    User list is empty yet
-</div>
-
 <main ng-controller="adminAccountController">
-    <table class="table table-bordered table-striped" style="width:450px; margin-left: 100px;" ng-show="users.length > 0">
+    <div class="alert alert-danger" role="alert" ng-show="error">
+        {{errorMessage}}
+    </div>
+
+    <div class="alert alert-success" role="alert" ng-show="successMessage.length > 0">
+        {{successMessage}}
+    </div>
+
+    <h3 style="margin-left:100px;">User list</h3>
+    <div class="alert alert-info" style="width:400px;margin-left:100px;" ng-show="users.length == 0">
+        User list is empty yet
+    </div>
+
+    <a class="go-to-user-account-link" href="#/user-account">Go to user account</a>
+    <table class="table table-bordered table-striped" style="width:1000px; margin-left: 100px;" ng-show="users.length > 0">
         <thead>
         <tr>
             <th style="text-align: center;">Name</th>
             <th style="text-align: center;">Login</th>
-            <th style="text-align: center;">Password</th>
             <th style="text-align: center;">Desire</th>
+            <th style="text-align: center;" ng-show = "isFullTable">Target</th>
+            <th style="text-align: center;">Action</th>
         </tr>
             </thead>
         <tbody>
         <tr ng-repeat="user in users">
             <td>{{user.name}}</td>
             <td>{{user.login}}</td>
-            <td>{{user.password}}</td>
             <td>{{user.desire}}</td>
+            <td ng-show = "isFullTable">{{user.target}}</td>
             <td  style="width:70px;text-align:center;">
-                <button class="btn btn-mini btn-danger" ng-click="deleteUser(user.login)">Удалить</button>
+                <button class="btn btn-mini btn-danger" ng-click="deleteUser(user.login)">Annihilate</button>
             </td>
         </tr>
         </tbody>
     </table>
+    <button class="btn btn-mini btn-success" style="width:120px; margin-left: 100px;" ng-click="letsRock()">Let's rock!</button>
+    <button class="btn btn-mini btn-success" style="width:120px;" ng-show="!isFullTable" ng-click="showFullTable()">Show full table</button>
+    <button class="btn btn-mini btn-success" style="width:120px;" ng-show="isFullTable"  ng-click="hideFullTable()">Hide full table</button>
 </main>
