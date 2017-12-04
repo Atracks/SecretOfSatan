@@ -8,10 +8,15 @@ var userAccountController = function($scope, $http, userAccountService) {
     $scope.targetName = 'no_target';
     $scope.targetDesire = 'no_target_desire';
     $scope.currentUserLogin = getCurrentUserLogin();
-    getUser($scope.currentUserLogin)
 
     function getCurrentUserLogin() {
-        userAccountService.getCurrentUserLogin();
+        userAccountService.getCurrentUserLogin()
+            .success(function (login) {
+                getUser(login);
+            })
+            .error(function () {
+                setError('unable to get current login')
+            });
     }
 
     function getUser(login) {
