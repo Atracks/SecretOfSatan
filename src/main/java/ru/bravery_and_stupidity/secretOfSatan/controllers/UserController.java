@@ -49,7 +49,7 @@ public class UserController {
         userService.deleteUser(login);
     }
 
-    @RequestMapping(value = "/calculateTargets", method = RequestMethod.PATCH)
+    @RequestMapping(value = "/calculateTargets", method = RequestMethod.PUT)
     @ResponseBody
     public void calculateTargets() {
         userService.calculateTargets();
