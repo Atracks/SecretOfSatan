@@ -19,6 +19,7 @@ App.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'login/login.html',
       controller: loginController
   });
+
   $routeProvider.otherwise({redirectTo: '/login'});
 }]);
 
