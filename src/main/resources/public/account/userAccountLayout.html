@@ -1,13 +1,14 @@
-<div class="alert alert-danger" role="alert" ng-show="error">
+<user-account.html class="alert alert-danger" role="alert" ng-show="error">
     {{errorMessage}}
-</div>
+</user-account.html>
 
 <div class="userAccount padding">
     User: <u>{{user.name}}</u>
     <a class="rightAligned"
-        href="#/login"
-        title="log out">
-        <img class="exitButton" src="/../img/exit.jpeg">
+       href="#/login"
+       title="log out"
+       ng-click="logout()">
+    <img class="exitButton" src="/../img/exit.jpeg">
     </a>
 </div>
 
