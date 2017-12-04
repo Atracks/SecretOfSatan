@@ -2,6 +2,7 @@
 
 var loginController = function($scope, $http, loginService) {
     resetError();
+    replaceToAccount();
 
     $scope.onLogin = function () {
         loginService.login($scope.login, $scope.password).then(function (response) {
