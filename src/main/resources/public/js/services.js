@@ -22,6 +22,10 @@ AppServices.service('userAccountService', ['$http','$q', function($http) {
 
         getCurrentUserLogin: function() {
             return $http.get('users/getCurrentUserLogin/')
+        },
+
+        logout: function () {
+            return $http.post('/logout')
         }
     }
 }]);

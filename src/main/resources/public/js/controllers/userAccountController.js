@@ -55,6 +55,13 @@ var userAccountController = function($scope, $http, userAccountService) {
             });
     }
 
+    $scope.logout = function() {
+        userAccountService.logout()
+            .error(function() {
+                setError('unable to logout');
+            });
+    }
+
     function setError (message) {
         $scope.error = true;
         $scope.errorMessage = message;
