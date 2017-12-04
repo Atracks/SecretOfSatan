@@ -7,7 +7,17 @@ var userAccountController = function($scope, $http, userAccountService) {
     $scope.targetIsAppointed = false;
     $scope.targetName = 'no_target';
     $scope.targetDesire = 'no_target_desire';
-    getUser('terminator1')
+    $scope.currentUserLogin = getCurrentUserLogin();
+
+    function getCurrentUserLogin() {
+        userAccountService.getCurrentUserLogin()
+            .success(function (login) {
+                getUser(login);
+            })
+            .error(function () {
+                setError('unable to get current login')
+            });
+    }
 
     function getUser(login) {
         userAccountService.getUser(login)

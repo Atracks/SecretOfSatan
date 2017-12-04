@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +59,16 @@ public class UserController {
     @RequestMapping(value = "/currentUserRole", method = RequestMethod.GET)
     @ResponseBody
     public List<GrantedAuthority> getCurrentUserRole() {
-        return (List<GrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        return (List<GrantedAuthority>)SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getAuthorities();
+    }
+
+    @RequestMapping(value = "/getCurrentUserLogin", method = RequestMethod.GET)
+    @ResponseBody
+    public String getCurrentUserLogin() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth.getName();
     }
 
     @ExceptionHandler(Exception.class)
