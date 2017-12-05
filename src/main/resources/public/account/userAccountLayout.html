@@ -31,13 +31,12 @@
     <tr class="topAlign">
         <td class="halfWidth noBorder padding">
             <textarea class="dataWindow"
-                   type="submit"
+                   type="text"
                    ng-model="user.desire"
-                   ng-show="!targetIsAppointed"/>
-            <textarea class="dataWindow"
-                   type="submit"
-                   ng-model="targetDesire"
-                   ng-show="targetIsAppointed"/>
+                   ng-show="!targetIsAppointed"></textarea>
+            <div class="dataWindow border" ng-show="targetIsAppointed">
+                {{targetDesire}}
+            </div>
         </td>
         <td class="halfWidth noBorder padding">
             <img src="/../img/santa_o_O.jpg"
