@@ -22,6 +22,8 @@ public class UserDao {
     @NotNull
     private String targetLogin = "";
 
+    private boolean isAdmin = false;
+
     public void setLogin(@NotNull String login) {
         this.login = login;
     }
@@ -40,6 +42,10 @@ public class UserDao {
 
     public void setTarget(@NotNull String targetLogin) {
         this.targetLogin = targetLogin;
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     @NotNull
@@ -67,6 +73,10 @@ public class UserDao {
         return targetLogin;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
     @NotNull
     public User mapToModel() {
         User model = new User();
@@ -75,7 +85,7 @@ public class UserDao {
         model.setName(name);
         model.setDesire(desire);
         model.setTarget(targetLogin);
-        model.setAdmin(false);
+        model.setAdmin(isAdmin);
         return model;
     }
 
@@ -90,7 +100,8 @@ public class UserDao {
                 && password.equals(userDao.password)
                 && name.equals(userDao.name)
                 && desire.equals(userDao.desire)
-                && targetLogin.equals(userDao.targetLogin);
+                && targetLogin.equals(userDao.targetLogin)
+                && (isAdmin == userDao.isAdmin);
     }
 
     @Override
@@ -100,6 +111,7 @@ public class UserDao {
         result = 31 * result + name.hashCode();
         result = 31 * result + desire.hashCode();
         result = 31 * result + targetLogin.hashCode();
+        result = 31 * result + (isAdmin ? 1 : 0);
         return result;
     }
 
@@ -111,6 +123,7 @@ public class UserDao {
                 + ", name='" + name + '\''
                 + ", desire='" + desire + '\''
                 + ", targetLogin='" + targetLogin + '\''
+                + ", isAdmin='" + isAdmin + '\''
                 + '}';
     }
 
