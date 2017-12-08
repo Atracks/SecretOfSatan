@@ -7,35 +7,44 @@
         {{successMessage}}
     </div>
 
-    <h3 style="margin-left:100px;">User list</h3>
     <div class="alert alert-info" style="width:400px;margin-left:100px;" ng-show="users.length == 0">
         User list is empty yet
     </div>
 
     <a class="go-to-user-account-link" href="#/user-account">Go to user account</a>
-    <table class="table table-bordered table-striped" style="width:1000px; margin-left: 100px;" ng-show="users.length > 0">
-        <thead>
-        <tr>
-            <th style="text-align: center;">Name</th>
-            <th style="text-align: center;">Login</th>
-            <th style="text-align: center;">Desire</th>
-            <th style="text-align: center;" ng-show = "isFullTable">Target</th>
-            <th style="text-align: center;">Action</th>
-        </tr>
+
+    <div class="meals-list">
+
+        <div class="table-buttons">
+            <button type="submit" class="pure-button" ng-show="!isFullTable" ng-click="showFullTable()">Show full table</button>
+            <button type="submit" class="pure-button" ng-show="isFullTable"  ng-click="hideFullTable()">Hide full table</button>
+            <button type="submit" class="pure-button" ng-click="letsRock()">Let's rock!</button>
+        </div>
+
+        <table class="pure-table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Login</th>
+                <th>Desire</th>
+                <th ng-show = "isFullTable">Target</th>
+                <th>Action</th>
+            </tr>
             </thead>
-        <tbody>
-        <tr ng-repeat="user in users">
-            <td>{{user.name}}</td>
-            <td>{{user.login}}</td>
-            <td>{{user.desire}}</td>
-            <td ng-show = "isFullTable">{{user.target}}</td>
-            <td  style="width:70px;text-align:center;">
-                <button class="btn btn-mini btn-danger" ng-click="deleteUser(user.login)">Annihilate</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <button class="btn btn-mini btn-success" style="width:120px; margin-left: 100px;" ng-click="letsRock()">Let's rock!</button>
-    <button class="btn btn-mini btn-success" style="width:120px;" ng-show="!isFullTable" ng-click="showFullTable()">Show full table</button>
-    <button class="btn btn-mini btn-success" style="width:120px;" ng-show="isFullTable"  ng-click="hideFullTable()">Hide full table</button>
+
+            <tbody>
+
+            <tr ng-repeat="user in users" tt-editable-row rowValue="user"
+                ng-class="{'pure-table-odd': $index % 2 == 1, 'pure-table-even': $index % 2 == 0}">
+                <td> {{user.name}} </td>
+                <td> {{user.login}} </td>
+                <td> {{user.desire}}</td>
+                <td ng-show = "isFullTable"> {{user.target}}</td>
+                <td>
+                    <button type="submit" class="pure-button" ng-click="deleteUser(user.login)">Annihilate</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </main>
