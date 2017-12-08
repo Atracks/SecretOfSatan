@@ -1,7 +1,7 @@
 /* composite styles ******************************************************************************/
 /* width + centered + font-size */
 .userAccount {
-    width: 720px;
+    max-width: 720px;
     margin: auto;
     font-size: 130%;
 }
@@ -13,13 +13,13 @@
 
 .dataWindow {
     width: 100%;
-    height: 500px;
+    height: 200px;
     text-align:top;
 }
 
 img.centralPicture {
     width: 100%;
-    height: 500px;
+    height: auto;
 }
 
 img.exitButton {
@@ -61,6 +61,7 @@ img.settingsButton {
 td.sideSantaContainer {
     width: 250px
 }
+.td
 
 /* horizontal position */
 .centeredText {
@@ -85,7 +86,7 @@ td.centeredVertical {
     display: flex;
 }
 .elementMarginTop {
-    margin-top: 1px;
+    margin-top: 7px;
 }
 
 /* padding */
@@ -106,4 +107,8 @@ td.centeredVertical {
 }
 .noBorder {
     border-width: 0px;
+}
+
+.fixedSize {
+    resize: none;
 }
