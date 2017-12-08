@@ -19,10 +19,20 @@ class UserRepositoryUnit implements UserRepository {
 
     @Override
     public void saveUser(@NotNull User user) {
+        if(!isUserExist(user.getLogin())) {
+            encodeUserPassword(user);
+        }
+        storage.merge(user);
+    }
+
+    private boolean isUserExist(@NotNull String login) {
+        return getUser(login) != null;
+    }
+
+    private void encodeUserPassword(@NotNull User user) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        storage.merge(user);
     }
 
     @Nullable
