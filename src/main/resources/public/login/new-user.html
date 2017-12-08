@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create User Secret Santa</title>
+    <link rel="stylesheet" href="/../css/pure-theme.css">
+    <link rel="stylesheet" href="/../css/secret-santa.css">
+</head>
+<body class="pure-skin-theme" id="createUserApp">
+
+    <main ng-controller="newUserController">
+
+        <div class="alert alert-danger" role="alert" ng-show="error">
+            {{errorMessage}}
+        </div>
+
+        <div class="login-container">
+
+            <form name="form" ng-submit="onCreateUser()" class="pure-form login-form" novalidate>
+                <fieldset class="pure-group">
+                    <legend>New User?</legend>
+                    <div class="form-field">
+                        <input type="text" ng-model="login"
+                               name="login" class="pure-input-1" placeholder="Login">
+                    </div>
+
+                    <div class="form-field">
+                        <input type="text" ng-model="casualName"
+                               name="casualName" class="pure-input-1" placeholder="Casual name">
+                    </div>
+
+                    <div class="form-field">
+                        <input type="password" ng-model="password" name="password" class="pure-input-1" placeholder="Password">
+                    </div>
+
+                    <div class="last-form-field">
+                        <input type="password" ng-model="confirmPassword" name="confirmPassword" class="pure-input-1"
+                               placeholder="Confirm Password">
+                    </div>
+                </fieldset>
+
+                <button type="submit" class="pure-button pure-input-1 pure-button-primary">Create User</button>
+                <a class="new-user-link" href="#/login">Already a user?</a>
+
+            </form>
+
+        </div>
+    </main>
+    <script src="/../js/controllers/newUserController.js"></script>
+</body>
+</html>

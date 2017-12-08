@@ -1,0 +1,46 @@
+/* app css stylesheet */
+
+.background_picture {img src="santa_background_1.jpg"}
+
+#wrapper {
+    margin: auto;
+    width: 1000px;
+    margin-top: 20px;
+}
+
+.menu {
+    text-align: center;
+    list-style: none;
+    padding: 0 0 0.5em;
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.menu:before {
+    content: "[";
+}
+
+.menu:after {
+    content: "]";
+}
+
+.menu > li {
+    display: inline;
+}
+
+.menu > li:before {
+    content: "|";
+    padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+    content: "";
+    padding: 0;
+}
+
+@media screen and (min-width: 14em) {
+    .login-container {
+        max-width: 14em;
+        margin: 0 auto;
+    }
+}
