@@ -8,7 +8,7 @@
 
 /* button */
 .simpleButton {
-    width: 150px;
+    width: 75px;
 }
 
 .dataWindow {
@@ -33,7 +33,7 @@ img.settingsButton {
 }
 
 .successMarker {
-    width: 150px;
+    width: 75px;
     margin-top: 10px;
     color: #fff;
     background-color: #449d44;
