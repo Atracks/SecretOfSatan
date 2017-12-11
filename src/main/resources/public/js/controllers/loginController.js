@@ -1,8 +1,11 @@
 'use strict';
 
 var loginController = function($scope, $http, loginService) {
+    $scope.isRegistrationAllowed = false;
+    checkIsRegistrationAllowed();
     resetError();
     replaceToAccount();
+
 
     $scope.onLogin = function () {
         loginService.login($scope.login, $scope.password).then(function (response) {
@@ -27,16 +30,32 @@ var loginController = function($scope, $http, loginService) {
 
     function replaceToAccount() {
         loginService.getCurrentUserRole().success(function (currentUserRole) {
+            var currentLocation = window.location;
             if(currentUserRole[0].authority === "ROLE_ADMIN") {
                 window.location.replace('#/admin-account');
             }
             if(currentUserRole[0].authority === "ROLE_USER") {
                 window.location.replace('#/user-account');
             }
+            if((currentUserRole[0].authority != undefined) && (currentLocation === window.location)) {
+                window.location.reload(true);
+            }
             resetError();
         }).error(function () {
             setError("Get user role error");
         })
     }
+    
+    function checkIsRegistrationAllowed() {
+        loginService.checkIsRegistrationAllowed().success(function (response) {
+            if("true" === response) {
+                $scope.isRegistrationAllowed = true;
+            } else {$scope.isRegistrationAllowed = false;}
+        }).error(function () {
+            setError("Internal service error. Please contact with support team");
+        })
+    }
 }
+
+
 
