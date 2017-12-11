@@ -167,4 +167,34 @@ public final class UserServiceUnit implements UserService {
         return (bound == 1) && (availableUsers.size() == 1) && denied.equals(availableUsers.get(0));
     }
 
+    @Override
+    public boolean isRegistrationAllowed() {
+        List<User> users = repository.getUsers();
+        if (!users.isEmpty()) {
+            if(users.get(0).getTarget().isEmpty()) {
+                checkUsersForEmptyTargets(users);
+                return true;
+            } else {
+                checkUsersForTargets(users);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void checkUsersForEmptyTargets(List<User> users) {
+        for (User eachUser: users) {
+            if (!eachUser.getTarget().isEmpty()) {
+                throw new UnsupportedOperationException("Found users with targets");
+            }
+        }
+    }
+
+    private void checkUsersForTargets(List<User> users) {
+        for (User eachUser: users) {
+            if(eachUser.getTarget().isEmpty()) {
+                throw new UnsupportedOperationException("Found users without targets");
+            }
+        }
+    }
 }

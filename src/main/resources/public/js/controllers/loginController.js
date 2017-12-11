@@ -1,8 +1,11 @@
 'use strict';
 
 var loginController = function($scope, $http, loginService) {
+    $scope.isRegistrationAllowed = false;
+    checkIsRegistrationAllowed();
     resetError();
     replaceToAccount();
+
 
     $scope.onLogin = function () {
         loginService.login($scope.login, $scope.password).then(function (response) {
@@ -40,6 +43,16 @@ var loginController = function($scope, $http, loginService) {
             resetError();
         }).error(function () {
             setError("Get user role error");
+        })
+    }
+    
+    function checkIsRegistrationAllowed() {
+        loginService.checkIsRegistrationAllowed().success(function (response) {
+            if("true" === response) {
+                $scope.isRegistrationAllowed = true;
+            } else {$scope.isRegistrationAllowed = false;}
+        }).error(function () {
+            setError("Internal service error. Please contact with support team");
         })
     }
 }

@@ -71,6 +71,12 @@ public class UserController {
         return auth.getName();
     }
 
+    @RequestMapping(value = "/isRegistrationAllowed", method = RequestMethod.GET)
+    @ResponseBody
+    public boolean isRegistrationAllowed() {
+        return userService.isRegistrationAllowed();
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> errorHandler(Exception exc) {
         logger.error(exc.getMessage(), exc);
