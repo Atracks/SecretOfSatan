@@ -18,7 +18,7 @@
         <div class="table-buttons">
             <button type="submit" class="pure-button" ng-show="!isFullTable" ng-click="showFullTable()">Show full table</button>
             <button type="submit" class="pure-button" ng-show="isFullTable"  ng-click="hideFullTable()">Hide full table</button>
-            <button type="submit" class="pure-button" ng-click="letsRock()">Let's rock!</button>
+            <button type="submit" class="pure-button" ng-click="letsRock()" ng-show="isLetsRockAllowed">Let's rock!</button>
         </div>
 
         <table class="pure-table">
