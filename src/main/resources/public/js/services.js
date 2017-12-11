@@ -45,7 +45,8 @@ AppServices.service('loginService', ['$http','$q', function($http) {
             })
         },
 
-        getCurrentUserRole: function () {return $http.get('users/currentUserRole')}
+        getCurrentUserRole: function () {return $http.get('users/currentUserRole')},
+        checkIsRegistrationAllowed: function () {return $http.get('users/isRegistrationAllowed')}
     }
 }]);
 
