@@ -16,7 +16,7 @@ App.config(['$routeProvider', function ($routeProvider) {
   });
 
   $routeProvider.when('/user-account', {
-        templateUrl: 'account/userAccountLayout.html',
+        templateUrl: 'account/user-account.html',
         controller: userAccountController
   });
 
