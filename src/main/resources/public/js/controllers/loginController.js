@@ -27,11 +27,15 @@ var loginController = function($scope, $http, loginService) {
 
     function replaceToAccount() {
         loginService.getCurrentUserRole().success(function (currentUserRole) {
+            var currentLocation = window.location;
             if(currentUserRole[0].authority === "ROLE_ADMIN") {
                 window.location.replace('#/admin-account');
             }
             if(currentUserRole[0].authority === "ROLE_USER") {
                 window.location.replace('#/user-account');
+            }
+            if((currentUserRole[0].authority != undefined) && (currentLocation === window.location)) {
+                window.location.reload(true);
             }
             resetError();
         }).error(function () {
@@ -39,4 +43,6 @@ var loginController = function($scope, $http, loginService) {
         })
     }
 }
+
+
 

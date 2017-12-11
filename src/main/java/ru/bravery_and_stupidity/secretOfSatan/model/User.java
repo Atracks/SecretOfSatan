@@ -104,6 +104,7 @@ public class User {
         dao.setName(name);
         dao.setDesire(desire);
         dao.setTarget(target);
+        dao.setAdmin(isAdmin);
         return dao;
     }
 

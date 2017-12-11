@@ -26,9 +26,8 @@ var newUserController = function($scope, newUserService, loginService) {
 
     function checkLogin () {
         var pattern = /^[\w]+$/;
-        if(($scope.login === undefined) || ($scope.login.length < 6) || (!pattern.test($scope.login))) {
-            var errorMessage = "The login is mandatory must have minimum 6 characters " +
-                               "and must contain only letters or numbers";
+        if(($scope.login === undefined) || (!pattern.test($scope.login))) {
+            var errorMessage = "Login is invalid. Only letters or digits are allowed";
             setError(errorMessage);
             return false;
         }
@@ -38,7 +37,6 @@ var newUserController = function($scope, newUserService, loginService) {
     
     function checkCasualName() {
         var pattern = /^[\w ]+$/;
-        console.info(pattern.test($scope.casualName));
         if(($scope.casualName === undefined)||($scope.casualName.trim() === "")|| (!pattern.test($scope.casualName))) {
             var errorMessage = "Enter your casual name. It must contain only letters, numbers or spaces";
             setError(errorMessage);
@@ -57,9 +55,8 @@ var newUserController = function($scope, newUserService, loginService) {
     }
     
     function checkPasswordSecurity() {
-        var pattern = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}/;
-        if(($scope.password === undefined) || (!pattern.test($scope.password))) {
-            var errorMessage = "The password is mandatory must have minimum 6 characters. At least one number and uppercase";
+        if(($scope.password === undefined) || ($scope.password.length < 6)) {
+            var errorMessage = "Password is invalid. Length must be more than 6 characters.";
             setError(errorMessage);
             return false;
         } else {
@@ -71,7 +68,7 @@ var newUserController = function($scope, newUserService, loginService) {
     function checkPasswordForbiddenSymbols() {
         var forbiddenPattern = /[/"'\\;:]+/;
         if((forbiddenPattern.test($scope.password))) {
-            var errorMessage = "The password contains forbidden symbols / \" ' \\ ; :";
+            var errorMessage = "Password is invalid. Contains forbidden symbols / \" ' \\ ; :";
             setError(errorMessage);
             return false;
         } else {
