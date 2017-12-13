@@ -36,7 +36,7 @@ var newUserController = function($scope, newUserService, loginService) {
     }
     
     function checkCasualName() {
-        var pattern = /^[\w ]+$/;
+        var pattern = /^([a-zA-Z ]+|[а-яёА-ЯЁ ]+)$/;
         if(($scope.casualName === undefined)||($scope.casualName.trim() === "")|| (!pattern.test($scope.casualName))) {
             var errorMessage = "Enter your casual name. It must contain only letters, numbers or spaces";
             setError(errorMessage);
