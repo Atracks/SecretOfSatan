@@ -9,7 +9,7 @@ var newUserController = function($scope, newUserService, loginService) {
                 resetError();
                 replaceToAccount();
             }).error(function () {
-                setError("Create user error")
+                setError("Не получилось записать тебя на прием к Санте")
             })
         }
     }
@@ -27,7 +27,7 @@ var newUserController = function($scope, newUserService, loginService) {
     function checkLogin () {
         var pattern = /^[\w]+$/;
         if(($scope.login === undefined) || (!pattern.test($scope.login))) {
-            var errorMessage = "Login is invalid. Only letters or digits are allowed";
+            var errorMessage = "Давай выберем подходящий никнейм. Он должен состоять из английских букв и цифр";
             setError(errorMessage);
             return false;
         }
@@ -36,9 +36,9 @@ var newUserController = function($scope, newUserService, loginService) {
     }
     
     function checkCasualName() {
-        var pattern = /^([a-zA-Z ]+|[а-яёА-ЯЁ ]+)$/;
+        var pattern = /^([\w ]+|[а-яА-я0-9 ]+)$/;
         if(($scope.casualName === undefined)||($scope.casualName.trim() === "")|| (!pattern.test($scope.casualName))) {
-            var errorMessage = "Enter your casual name. It must contain only letters, numbers or spaces";
+            var errorMessage = "А тебя точно зовут так? Санта признает только имена из букв и пробелов";
             setError(errorMessage);
             return false;
         } else {
@@ -56,7 +56,7 @@ var newUserController = function($scope, newUserService, loginService) {
     
     function checkPasswordSecurity() {
         if(($scope.password === undefined) || ($scope.password.length < 6)) {
-            var errorMessage = "Password is invalid. Length must be more than 6 characters.";
+            var errorMessage = "Что-то с паролем не так. Его длина должна быть больше 6 знаков, иначе гномам он не понравится";
             setError(errorMessage);
             return false;
         } else {
@@ -68,7 +68,7 @@ var newUserController = function($scope, newUserService, loginService) {
     function checkPasswordForbiddenSymbols() {
         var forbiddenPattern = /[/"'\\;:]+/;
         if((forbiddenPattern.test($scope.password))) {
-            var errorMessage = "Password is invalid. Contains forbidden symbols / \" ' \\ ; :";
+            var errorMessage = "Что-то с паролем не так. Похоже, что он содержит запрещенные символы, которые пугают эльфов / \" ' \\ ; :";
             setError(errorMessage);
             return false;
         } else {
@@ -79,7 +79,7 @@ var newUserController = function($scope, newUserService, loginService) {
     
     function checkPasswordsMatch() {
         if(($scope.password === undefined) ||($scope.password != $scope.confirmPassword)) {
-            setError("Passwords must match");
+            setError("Пароли должны совпадать точь-в-точь");
             return false;
         }
         resetError();
@@ -91,7 +91,7 @@ var newUserController = function($scope, newUserService, loginService) {
             window.location.replace('#/user-account');
             resetError();
         }).error(function () {
-            setError("Login in to account error");
+            setError("Кажется, не получилось войти");
         });
     }
 }

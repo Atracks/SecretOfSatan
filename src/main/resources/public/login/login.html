@@ -13,7 +13,7 @@
     <script src="/../bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/../bootstrap/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login Secret Santa</title>
+    <title>Представиться Санте</title>
 </head>
 
 <body class="pure-skin-theme" id="loginApp">
@@ -23,25 +23,23 @@
             {{errorMessage}}
         </div>
         <tt-error-messages extra-styles="access-screen"></tt-error-messages>
-
+        <div class="hello-from-santa">Привет, что-то я тебя не узнаю. Представься, а я передам Санте, кто к нему пожаловал</div>
         <div class="login-container">
             <form name="form" class="pure-form login-form">
                 <fieldset class="pure-group">
-                    <legend>Log In</legend>
                     <div class="form-field">
                         <input type="text" ng-model="login"
-                               name="login" class="pure-input-1" placeholder="Login">
+                               name="login" class="pure-input-1" placeholder="Никнейм">
                     </div>
                     <div class="last-form-field">
                         <input type="password" ng-model="password"
-                               name="password" class="pure-input-1" placeholder="Password">
+                               name="password" class="pure-input-1" placeholder="Секретный пароль">
                     </div>
                 </fieldset>
-                <button class="pure-button pure-input-1 pure-button-primary" ng-click="onLogin()">Log In</button>
-                <a class="new-user-link" href="#/new-user" ng-show="isRegistrationAllowed">New user?</a>
+                <button class="pure-button pure-input-1 pure-button-primary" ng-click="onLogin()">Представиться</button>
+                <a class="new-user-link" href="#/new-user" ng-show="isRegistrationAllowed">Санта меня ещё не знает</a>
             </form>
         </div>
     </main>
 </body>
 </html>
-
