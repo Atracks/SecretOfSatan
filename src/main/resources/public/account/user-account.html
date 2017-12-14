@@ -2,7 +2,7 @@
     {{errorMessage}}
 </user-account.html>
 
-<div class="text-from-santa" ng-show="!targetIsAppointed">
+<div class="hello-from-santa" ng-show="!targetIsAppointed">
     Санта всех нас хорошо знает, но в последнее время у него стало плохо с памятью:
     теряет очки, путает эльфов с гномами, так что давай напомним ему кое-что о тебе.
     Запиши сюда то, что тебе интересно, что заставляет твое лицо улыбаться, а душу -
@@ -74,13 +74,8 @@
                 {{targetDesire}}
             </div>
         </td>
-        <td>
-            <button class="elementMarginTop simpleButton btn btn-primary centeredText"
-                    ng-show="!targetIsAppointed"
-                    ng-click="updateUser(user)">Отправить</button>
-        </td>
-    </tr>
 
+    </tr>
     <tr>
         <td class="fullWidth noBorder padding" colspan="2">
             <img src="/../img/santa_o_O.jpg"
@@ -92,3 +87,9 @@
         </td>
     </tr>
 </table>
+<div class="back-to-user-account-button">
+    <button class="pure-button pure-input-1 pure-button-primary centeredText"
+            ng-show="!targetIsAppointed"
+            ng-click="updateUser(user)">Отправить
+    </button>
+</div>
