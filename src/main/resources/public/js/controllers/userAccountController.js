@@ -49,6 +49,7 @@ var userAccountController = function($scope, $http, userAccountService) {
             .success(function() {
                 getUser($scope.user.login);
                 $scope.letterIsSent = true;
+                window.location.replace("#/send-letter-success");
             })
             .error(function() {
                 setError('Не полчилось обновить информацию ' + $scope.user);
