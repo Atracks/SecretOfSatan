@@ -2,64 +2,68 @@
     {{errorMessage}}
 </user-account.html>
 
-<div class="hello-from-santa" ng-show="!targetIsAppointed">
-    Санта всех нас хорошо знает, но в последнее время у него стало плохо с памятью:
-    теряет очки, путает эльфов с гномами, так что давай напомним ему кое-что о тебе.
-    Запиши сюда то, что тебе интересно, что заставляет твое лицо улыбаться, а душу -
-    становиться теплее. Только давай по-честному и тогда я передам твое письмо Санте!
-    Не стесняйся, никто кроме него о твоих мечтах не узнает, даю тебе свое гномское
-    слово! Совсем скоро наступит волшебный Новый Год, и кто знает, вдруг какая-то из
-    твоих грез осуществится? Ах да, можешь не торопиться и возвращаться к своему письму,
-    когда захочешь. Но помни, что править его можно только до 20 декабря 2017 года!
-</div>
-
-<div class="text-from-santa" ng-show="targetIsAppointed">
-    Зайдя в дом Санты, ты находишь письмо, на котором написано твое имя
-</div>
+<table class="userAccount noBorder margin">
+    <tr>
+        <td class="halfWidth noBorder padding" colspan="2">
+            <img src="/../img/santa_o_O.jpg"
+                 class="centralPicture"
+                 ng-show="!targetIsAppointed">
+            <img src="/../img/father_frost.jpg"
+                 class="centralPicture"
+                 ng-show="targetIsAppointed">
+        </td>
+    </tr>
+</table>
 
 <table class="userAccount noBorder margin">
     <tr>
-        <td class="noBorder">
+        <td class="letterIntro">
+            <div class="intro" ng-show="targetIsAppointed">
+                Зайдя в дом Санты, ты находишь письмо, на котором написано твое имя
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+<table class="userAccount noBorder margin">
+    <tr>
+        <td class="letterIntro">
+            <div class="intro" ng-show="!targetIsAppointed">
+                Санта всех нас хорошо знает, но в последнее время у него стало плохо с памятью:
+                теряет очки, путает эльфов с гномами, так что давай напомним ему кое-что о тебе.
+                Запиши сюда то, что тебе интересно, что заставляет твое лицо улыбаться, а душу -
+                становиться теплее. Только давай по-честному, и тогда я передам твое письмо Санте!
+                Не стесняйся, никто кроме него о твоих мечтах не узнает, даю тебе свое гномское
+                слово! Совсем скоро наступит волшебный Новый Год, и кто знает, вдруг какая-то из
+                твоих грез осуществится? Ах да, можешь не торопиться и возвращаться к своему письму,
+                когда захочешь. Но помни, что изменять его можно только до 20 декабря 2017 года!
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="letterIntro">
             <div ng-show="!targetIsAppointed">
-                Дорогой Санта, меня зовут:
+                Дорогой Санта, меня зовут {{user.name}} и я хочу, чтобы ты знал кое-что обо мне.
             </div>
             <div ng-show="targetIsAppointed">
                 Кому:
+                {{user.name}}
             </div>
-            <u>{{user.name}}</u>
-            <a class="rightAligned"
-               href="#/login"
-               title="log out"
-               ng-show="targetIsAppointed"
-               ng-click="logout()">
-                <img class="exitButton" src="/../img/exit.jpeg">
-            </a>
-        </td>
-        <td class="noBorder">
-            <a class="rightAligned"
-               href="#/login"
-               title="log out"
-               ng-show="!targetIsAppointed"
-               ng-click="logout()">
-                <img class="exitButton" src="/../img/exit.jpeg">
-            </a>
         </td>
     </tr>
 
     <tr>
-        <td class="noBorder">
-            <div ng-show="!targetIsAppointed">
-                И я хочу, чтобы ты знал кое-что обо мне:
-            </div>
-            <div ng-show="targetIsAppointed">
+        <td class="letterIntro" ng-show="targetIsAppointed">
+            <div>
                 Вот и пришла пора суетиться!
                 В этом году ты поздравляешь своего
                 хорошего друга, а имя ему <u>{{targetName}}</u>.
                 Вперед, да пребудет с тобой Оливье!
-                <br/>Что, сложновато? Тогда смотри, что он пожелал сообщить о себе:
+                <br/><br/>Что, сложновато? Тогда смотри, что он пожелал сообщить о себе:
             </div>
         </td>
-        <td class="noBorder">
+        <td class="noBorder" ng-show="!targetIsAppointed">
             <!-- empty cell -->
         </td>
     </tr>
@@ -77,19 +81,18 @@
 
     </tr>
     <tr>
-        <td class="fullWidth noBorder padding" colspan="2">
-            <img src="/../img/santa_o_O.jpg"
-                 class="centralPicture"
-                 ng-show="!targetIsAppointed">
-            <img src="/../img/father_frost.jpg"
-                 class="centralPicture"
-                 ng-show="targetIsAppointed">
+        <td class="back-to-user-account-button">
+            <button class="pure-button pure-input-1 pure-button-primary centeredText"
+                    ng-show="!targetIsAppointed"
+                    ng-click="updateUser(user)">Отправить
+            </button>
+        </td>
+        <td class="back-to-user-account-button">
+            <button class="pure-button pure-input-1 pure-button-primary centeredText"
+                    ng-show="!targetIsAppointed"
+                    ng-click="logout()">Выйти
+            </button>
         </td>
     </tr>
 </table>
-<div class="back-to-user-account-button">
-    <button class="pure-button pure-input-1 pure-button-primary centeredText"
-            ng-show="!targetIsAppointed"
-            ng-click="updateUser(user)">Отправить
-    </button>
-</div>
+

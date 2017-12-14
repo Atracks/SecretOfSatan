@@ -75,6 +75,11 @@ td.sideSantaContainer {
     clear:right;
 }
 
+.leftAlignedAligned {
+    float:left;
+    clear:left;
+}
+
 /* vertical position */
 tr.topAlign {
     vertical-align: top;
@@ -96,7 +101,7 @@ td.centeredVertical {
 
 /* margin */
 .margin {
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 /* borders */
@@ -107,6 +112,20 @@ td.centeredVertical {
 }
 .noBorder {
     border-width: 0px;
+}
+
+.letterIntro {
+    position: relative;
+    padding-top: 30px;
+    padding-right: 10px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+    margin-bottom: 0px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    font-size: 100%;
+    color: #333;
+    text-align: justify;
 }
 
 .fixedSize {
