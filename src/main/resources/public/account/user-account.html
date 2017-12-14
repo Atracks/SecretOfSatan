@@ -15,10 +15,10 @@
     </tr>
 </table>
 
-<table class="userAccount noBorder margin">
+<table class="userAccount noBorder margin" ng-show="targetIsAppointed">
     <tr>
-        <td class="letterIntro">
-            <div class="intro" ng-show="targetIsAppointed">
+        <td class="text-from-santa">
+            <div class="intro">
                 Зайдя в дом Санты, ты находишь письмо, на котором написано твое имя
             </div>
         </td>
@@ -28,7 +28,7 @@
 
 <table class="userAccount noBorder margin">
     <tr>
-        <td class="letterIntro">
+        <td colspan="2" class="text-from-santa">
             <div class="intro" ng-show="!targetIsAppointed">
                 Санта всех нас хорошо знает, но в последнее время у него стало плохо с памятью:
                 теряет очки, путает эльфов с гномами, так что давай напомним ему кое-что о тебе.
@@ -42,7 +42,7 @@
         </td>
     </tr>
     <tr>
-        <td class="letterIntro">
+        <td colspan="2" class="letterIntro">
             <div ng-show="!targetIsAppointed">
                 Дорогой Санта, меня зовут {{user.name}} и я хочу, чтобы ты знал кое-что обо мне.
             </div>
@@ -54,7 +54,7 @@
     </tr>
 
     <tr>
-        <td class="letterIntro" ng-show="targetIsAppointed">
+        <td colspan="2" class="letterIntro" ng-show="targetIsAppointed">
             <div>
                 Вот и пришла пора суетиться!
                 В этом году ты поздравляешь своего
@@ -63,13 +63,13 @@
                 <br/><br/>Что, сложновато? Тогда смотри, что он пожелал сообщить о себе:
             </div>
         </td>
-        <td class="noBorder" ng-show="!targetIsAppointed">
+        <td colspan="2" class="noBorder" ng-show="!targetIsAppointed">
             <!-- empty cell -->
         </td>
     </tr>
 
     <tr class="topAlign">
-        <td class="fullWidth noBorder padding">
+        <td colspan="2" class="fullWidth noBorder padding">
             <textarea class="dataWindow fixedSize"
                    type="text"
                    ng-model="user.desire"
@@ -80,19 +80,30 @@
         </td>
 
     </tr>
-    <tr>
-        <td class="back-to-user-account-button">
-            <button class="pure-button pure-input-1 pure-button-primary centeredText"
-                    ng-show="!targetIsAppointed"
+</table>
+
+<table class="userButtons noBorder margin">
+    <tr class="margin" ng-show="!targetIsAppointed">
+        <td class="back-to-user-account-button-left marginLeft">
+            <button class="pure-button pure-input-1 pure-button-primary centeredText buttonEqualWidth"
                     ng-click="updateUser(user)">Отправить
             </button>
         </td>
-        <td class="back-to-user-account-button">
-            <button class="pure-button pure-input-1 pure-button-primary centeredText"
-                    ng-show="!targetIsAppointed"
+        <td class="back-to-user-account-button-right marginRight">
+            <button class="pure-button pure-input-1 pure-button-primary centeredText buttonEqualWidth"
                     ng-click="logout()">Выйти
             </button>
         </td>
     </tr>
+    <tr class="margin" ng-show="targetIsAppointed">
+        <td class="back-to-user-account-button">
+            <button class="pure-button pure-input-1 pure-button-primary centeredText"
+                    ng-click="logout()">Выйти
+            </button>
+        </td>
+    </tr>
+</table>
+
+<table class="userButtons noBorder marginBottom">
 </table>
 

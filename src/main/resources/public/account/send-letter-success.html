@@ -1,8 +1,5 @@
 <main ng-controller="sendLetterSuccessController">
-    <div class="text-from-santa">
-        Ну вот и все, письмо написали, осталось дождаться 20 декабря 2017 года
-        и зайти к Санте снова, чтобы он шепнул тебе имя твоей цели!
-    </div>
+
     <table class="userAccount noBorder margin">
         <tr>
             <td class="fullWidth noBorder padding" colspan="2">
@@ -12,7 +9,18 @@
         </tr>
     </table>
 
-    <div class="back-to-user-account-button">
-        <button class="pure-button pure-input-1 pure-button-primary " ng-click="backToUserAccount()">Понятно</button>
+    <table class="userAccount noBorder margin">
+        <tr>
+            <td class="text-from-santa">
+                <div class="successText">
+                    Ну вот и все, письмо написали! Осталось дождаться 20 декабря 2017 года
+                    и зайти к Санте снова, чтобы узнать имя своей цели!
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="back-to-user-account-button margin">
+        <button class="pure-button pure-input-1 pure-button-primary " ng-click="backToUserAccount()">Исправить письмо</button>
     </div>
 </main>
