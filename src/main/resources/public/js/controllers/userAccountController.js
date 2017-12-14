@@ -15,7 +15,7 @@ var userAccountController = function($scope, $http, userAccountService) {
                 getUser(login);
             })
             .error(function () {
-                setError('unable to get current login')
+                setError('Не получилось определить никнейм')
             });
     }
 
@@ -29,7 +29,7 @@ var userAccountController = function($scope, $http, userAccountService) {
                 }
             })
             .error(function() {
-                setError('unable to get user ' + login);
+                setError('Не получилось тебя опознать ' + login);
             });
     }
 
@@ -40,7 +40,7 @@ var userAccountController = function($scope, $http, userAccountService) {
                 $scope.targetDesire = targetUser.desire;
             })
             .error(function() {
-                setError('strange shit: target is appointed, but not available');
+                setError('Мешок мне в трубу! Твой аккаунт почему-то недоступен');
             });
     }
 
@@ -49,16 +49,17 @@ var userAccountController = function($scope, $http, userAccountService) {
             .success(function() {
                 getUser($scope.user.login);
                 $scope.letterIsSent = true;
+                window.location.replace("#/send-letter-success");
             })
             .error(function() {
-                setError('unable to update user ' + $scope.user);
+                setError('Не полчилось обновить информацию ' + $scope.user);
             });
     }
 
     $scope.logout = function() {
         userAccountService.logout()
             .error(function() {
-                setError('unable to logout');
+                setError('Не получилось выйти');
             });
     }
 

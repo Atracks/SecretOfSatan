@@ -2,10 +2,31 @@
     {{errorMessage}}
 </user-account.html>
 
+<div class="hello-from-santa" ng-show="!targetIsAppointed">
+    Санта всех нас хорошо знает, но в последнее время у него стало плохо с памятью:
+    теряет очки, путает эльфов с гномами, так что давай напомним ему кое-что о тебе.
+    Запиши сюда то, что тебе интересно, что заставляет твое лицо улыбаться, а душу -
+    становиться теплее. Только давай по-честному и тогда я передам твое письмо Санте!
+    Не стесняйся, никто кроме него о твоих мечтах не узнает, даю тебе свое гномское
+    слово! Совсем скоро наступит волшебный Новый Год, и кто знает, вдруг какая-то из
+    твоих грез осуществится? Ах да, можешь не торопиться и возвращаться к своему письму,
+    когда захочешь. Но помни, что править его можно только до 20 декабря 2017 года!
+</div>
+
+<div class="text-from-santa" ng-show="targetIsAppointed">
+    Зайдя в дом Санты, ты находишь письмо, на котором написано твое имя
+</div>
+
 <table class="userAccount noBorder margin">
     <tr>
         <td class="noBorder">
-            User: <u>{{user.name}}</u>
+            <div ng-show="!targetIsAppointed">
+                Дорогой Санта, меня зовут:
+            </div>
+            <div ng-show="targetIsAppointed">
+                Кому:
+            </div>
+            <u>{{user.name}}</u>
             <a class="rightAligned"
                href="#/login"
                title="log out"
@@ -28,11 +49,14 @@
     <tr>
         <td class="noBorder">
             <div ng-show="!targetIsAppointed">
-                Letter to Santa:
+                И я хочу, чтобы ты знал кое-что обо мне:
             </div>
             <div ng-show="targetIsAppointed">
-                Need to make present to <u>{{targetName}}</u>.
-                <br/><u>{{targetName}}</u> asks Santa about:
+                Вот и пришла пора суетиться!
+                В этом году ты поздравляешь своего
+                хорошего друга, а имя ему <u>{{targetName}}</u>.
+                Вперед, да пребудет с тобой Оливье!
+                <br/>Что, сложновато? Тогда смотри, что он пожелал сообщить о себе:
             </div>
         </td>
         <td class="noBorder">
@@ -50,18 +74,8 @@
                 {{targetDesire}}
             </div>
         </td>
-        <td>
-            <button class="elementMarginTop simpleButton btn btn-primary centeredText"
-                    ng-show="!targetIsAppointed"
-                    ng-click="updateUser(user)">Send</button>
-            <div class="successMarker centeredText"
-                 ng-show="letterIsSent">
-                Success
-            </div>
-        </td>
 
     </tr>
-
     <tr>
         <td class="fullWidth noBorder padding" colspan="2">
             <img src="/../img/santa_o_O.jpg"
@@ -73,3 +87,9 @@
         </td>
     </tr>
 </table>
+<div class="back-to-user-account-button">
+    <button class="pure-button pure-input-1 pure-button-primary centeredText"
+            ng-show="!targetIsAppointed"
+            ng-click="updateUser(user)">Отправить
+    </button>
+</div>

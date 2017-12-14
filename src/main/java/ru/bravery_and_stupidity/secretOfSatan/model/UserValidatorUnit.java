@@ -55,7 +55,7 @@ public final class UserValidatorUnit implements UserValidator {
             return true;
         }
 
-        final String allowedNamePatternDescription = "[\\w ]+";
+        final String allowedNamePatternDescription = "([a-zA-Z ]+|[а-яёА-ЯЁ ]+)";
         Pattern allowedNamePattern = Pattern.compile(allowedNamePatternDescription);
         Matcher matcher = allowedNamePattern.matcher(username);
 

@@ -13,7 +13,7 @@ var loginController = function($scope, $http, loginService) {
                 resetError();
                 replaceToAccount();
             } else {
-                setError("Wrong username or password");
+                setError("Похоже, что Санта не помнит тебя. Проверь свой никнейм и секретный пароль");
             }
         })
     };
@@ -42,7 +42,7 @@ var loginController = function($scope, $http, loginService) {
             }
             resetError();
         }).error(function () {
-            setError("Get user role error");
+            setError("Не получилось определить твою роль на празднике");
         })
     }
     
@@ -52,7 +52,7 @@ var loginController = function($scope, $http, loginService) {
                 $scope.isRegistrationAllowed = true;
             } else {$scope.isRegistrationAllowed = false;}
         }).error(function () {
-            setError("Internal service error. Please contact with support team");
+            setError("Упс. Кажется, что-то пошло не так. Попробуйте связаться с новогодней службой поддержки: atracks@bk.ru, athest@mail.ru");
         })
     }
 }

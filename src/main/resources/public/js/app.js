@@ -25,6 +25,11 @@ App.config(['$routeProvider', function ($routeProvider) {
       controller: loginController
   });
 
+  $routeProvider.when('/send-letter-success', {
+    templateUrl: 'account/send-letter-success.html',
+    controller: sendLetterSuccessController
+  });
+
   $routeProvider.otherwise({redirectTo: '/login'});
 }]);
 
