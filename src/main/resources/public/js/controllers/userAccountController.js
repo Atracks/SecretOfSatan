@@ -52,15 +52,16 @@ var userAccountController = function($scope, $http, userAccountService) {
                 window.location.replace("#/send-letter-success");
             })
             .error(function() {
-                setError('Не полчилось обновить информацию ' + $scope.user);
+                setError('Не получилось обновить информацию ' + $scope.user);
             });
     }
 
     $scope.logout = function() {
-        userAccountService.logout()
-            .error(function() {
-                setError('Не получилось выйти');
-            });
+        userAccountService.logout().success(function () {
+            window.location.replace("#/login");
+        }).error(function() {
+            setError('Не получилось выйти');
+        });
     }
 
     function setError (message) {
