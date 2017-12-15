@@ -14,10 +14,19 @@
         <div class="alert alert-danger" role="alert" ng-show="error">
             {{errorMessage}}
         </div>
-        <div class="hello-from-santa">Ну что, садись поудобнее, бери перо и поведай Санте кто ты. Только помни, что Санта хорошо различает прописные и строчные буквы</div>
-        <div class="login-container">
+        <table class="userAccount noBorder margin">
+            <tr>
+                <td colspan="2" class="text-from-santa">
+                    <div class="introCentered">
+                        Ну что, садись поудобнее, бери перо и поведай Санте кто ты. Только помни, что Санта хорошо различает прописные и строчные буквы
+                    </div>
+                </td>
+            </tr>
+        </table>
 
-            <form name="form" ng-submit="onCreateUser()" class="pure-form login-form" novalidate>
+        <div class="login-container margin">
+
+            <form name="form" ng-submit="onCreateUser()" class="pure-form login-form margin" novalidate>
                 <fieldset class="pure-group">
                     <div class="form-field">
                         <input type="text" ng-model="login"
